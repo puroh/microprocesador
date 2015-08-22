@@ -1,6 +1,6 @@
 #include "screen.h"
 
-void showRegisters(long int *registers, size_t len)
+void showRegisters(unsigned long int *registers, size_t len)
 {
 	int i;
 

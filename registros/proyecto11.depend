@@ -31,3 +31,29 @@
 
 1440090989 source:c:\users\mauricio\proyecto_1\registros\alu.c
 
+1440215002 source:c:\users\mauricio\proyecto-1\registros\alu.c
+
+1440214977 source:c:\users\mauricio\proyecto-1\registros\main.c
+	<stdio.h>
+	<stdlib.h>
+	"screen.h"
+	"ALU.h"
+
+1440006617 c:\users\mauricio\proyecto-1\registros\registros.h
+
+1440007672 source:c:\users\mauricio\proyecto-1\registros\registros.c
+
+1440195985 source:c:\users\mauricio\proyecto-1\registros\screen.c
+	"screen.h"
+
+1440195985 c:\users\mauricio\proyecto-1\registros\screen.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<windows.h>
+	"colors.h"
+
+1440036406 c:\users\mauricio\proyecto-1\registros\colors.h
+
+1440214557 c:\users\mauricio\proyecto-1\registros\alu.h
+
