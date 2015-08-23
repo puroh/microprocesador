@@ -1,5 +1,5 @@
-registros/*.exe
-registros/*.o
-registros/*.cbp
-registros/*.depend
-registros/*.layout
+*.exe*
+*.o*
+*.cbp*
+*.depend*
+*.layout*
