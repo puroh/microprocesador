@@ -22,7 +22,7 @@ unsigned long int EOR(unsigned long int R0,unsigned long int R1){
     return R0^R1;
 
 }
-unsigned long int MV(unsigned long int R0,unsigned long int R1){
+unsigned long int MOV(unsigned long int R0,unsigned long int R1){
     return R0=R1;
 
 }
