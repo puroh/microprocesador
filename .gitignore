@@ -1,5 +1,12 @@
+<<<<<<< HEAD
+registros/*.cpb
+registros/*.layout
+registros/*.depend
+registros/*.o
+=======
 registros/*.exe
 registros/*.o
 registros/*.cbp
 registros/*.depend
 registros/*.layout
+>>>>>>> 5a2b2c0dbcc0e782b8ca62c3ada9ffa278f03d1a

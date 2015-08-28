@@ -1,10 +1,10 @@
-CC=gcc
-CFLAGS=	-03	-c	-wall
+CC = gcc
+CFLAGS= -O3 -c -Wall
 
-all:obj
+all:	object
 	$(CC)	-o	main*.o
 
-obj:
-	$(CC)	$(CFLAGS)	*.c
+object:
+	$(CC)	$(CFLAGS) *.c
 clean:
 	rm main$

@@ -1,5 +1,7 @@
-unsigned long int suma(unsigned long int R0, unsigned long int R1);
-unsigned long int resta(unsigned long int R0,unsigned long int R1);
-unsigned long int ANDS(unsigned long int R0, unsigned long int R1);
-unsigned long int ORES(unsigned long int R0,unsigned long int R1);
-unsigned long int XOR(unsigned long int R0,unsigned long int R1);
+#include <stdint.h>
+uint32_t ADD(uint32_t Rm,uint32_t Rn,uint32_t Rd);
+uint32_t SUB(uint32_t Rm,uint32_t Rn,uint32_t Rd);
+uint32_t AND(uint32_t Rm,uint32_t Rn,uint32_t Rd);
+uint32_t ORR(uint32_t Rm,uint32_t Rn,uint32_t Rd);
+uint32_t EOR(uint32_t Rm,uint32_t Rn,uint32_t Rd);
+uint32_t MOV(uint32_t Rm,uint32_t Rn,uint32_t Rd);
