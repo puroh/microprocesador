@@ -16,7 +16,25 @@ uint32_t ROR(uint32_t Rm,uint32_t Rn,uint32_t Rd)
 	Rd=Rm|Rd;
     return Rd;
 }
-uint32_t ASRS(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+uint32_t BIC(uint32_t Rm,uint32_t Rn,uint32_t Rd)
 {
-
+	Rd &= ~Rm;
+	return Rd;
 }
+uint32_t MVN(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+{
+	Rd=~Rm;
+	return Rd;
+}uint32_t RSBS(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+{
+	Rd=0-Rn;
+	return Rd;
+}
+void NOP()
+{
+}
+uint32_t REV(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+{
+ 
+}
+
