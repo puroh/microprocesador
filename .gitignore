@@ -1,5 +1,20 @@
+<<<<<<< HEAD
 *.exe*
 *.o*
 *.cbp*
 *.depend*
 *.layout*
+=======
+<<<<<<< HEAD
+registros/*.cpb
+registros/*.layout
+registros/*.depend
+registros/*.o
+=======
+registros/*.exe
+registros/*.o
+registros/*.cbp
+registros/*.depend
+registros/*.layout
+>>>>>>> 5a2b2c0dbcc0e782b8ca62c3ada9ffa278f03d1a
+>>>>>>> a6e9e21c9d7943860e5e69a54951d44c559dcb4e
