@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS= -O3 -c -Wall
+CFLAGS=	-O3	-c -Wall
 
 all:	object
 	$(CC)	-o	main*.o
