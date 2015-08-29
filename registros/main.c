@@ -7,8 +7,6 @@
 
 int main(void)
 {
-   uint32_t registers[12],j=1;
-   registers[0]=2;
-   registers[1]=2;
+   uint32_t registers[12];
    showRegisters(registers, 12);
 }

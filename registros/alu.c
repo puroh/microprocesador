@@ -2,12 +2,13 @@
 void ADD(uint32_t *Rm,uint32_t *Rn)
 {
     uint8_t C=0,Z=0,N=0,V=0;
-    *Rm=*Rm+*Rn;
-    if((*Rm<2147483648)&&(*Rn<2147483648||*Rn>=2147483648))
+
+    if((*Rm>2147483648||*Rn>2147483648)&&((*Rm!=0)||(*Rn!=0)))
 	{
         C=1;
 	}
     printf("\nC:%d\n",C);
+    *Rm=*Rm+*Rn;
     if(!*Rm)
 	{
         Z=1;
@@ -17,7 +18,7 @@ void ADD(uint32_t *Rm,uint32_t *Rn)
 void SUB(uint32_t *Rm,uint32_t *Rn)
 {
 	uint8_t C=0,Z=0,N=0,V=0;
-    *Rm=*Rm-(~*Rn+1);
+    *Rm=*Rm+((~*Rn)+1);
     if(*Rm==~*Rn)
 	{
         C=1;
