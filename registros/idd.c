@@ -1,22 +1,5 @@
 #include <stdint.h>
 
-uint32_t BIC(uint32_t Rm,uint32_t Rn,uint32_t Rd)
-{
-	Rd &= ~Rm;
-	return Rd;
-}
-uint32_t MVN(uint32_t Rm,uint32_t Rn,uint32_t Rd)
-{
-	Rd=~Rm;
-	return Rd;
-}uint32_t RSBS(uint32_t Rm,uint32_t Rn,uint32_t Rd)
-{
-	Rd=0-Rn;
-	return Rd;
-}
-void NOP()
-{
-}
 void LSLS(uint32_t *Rm,uint32_t *Rn)
 {
   *Rm=*Rm<<*Rn;
@@ -45,6 +28,21 @@ void REV(uint32_t *Rm,uint32_t *Rn)
 void REV16(uint32_t *Rm,uint32_t *Rn)
 {
     *Rn=((*Rm<<24)>>16)|((*Rm<<16)>>24);
-    *Rm=*Rn|(((Rm>>24)<<16)|((Rm>>16)<<24));
+    *Rm=*Rn|(((*Rm>>24)<<16)|((*Rm>>16)<<24));
+}
+void BIC(uint32_t *Rm,uint32_t *Rn)
+{
+	*Rm &= ~*Rn;
+}
+void MVN(uint32_t *Rm,uint32_t *Rn)
+{
+	*Rm=~*Rn;
+}
+void RSBS(uint32_t *Rm,uint32_t *Rn)
+{
+	*Rm=0-*Rn;
+}
+void NOP(void)
+{
 }
 
