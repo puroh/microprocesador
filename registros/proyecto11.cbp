@@ -31,15 +31,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="alu.c">
+		<Unit filename="ALU.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="alu.h" />
+		<Unit filename="ALU.h" />
 		<Unit filename="colors.h" />
-		<Unit filename="idd.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="idd.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
