@@ -1,14 +1,10 @@
 *.exe*
 *.o*
-*.cbp*
 *.depend*
 *.layout*
-
-registros/*.cpb*
 registros/*.layout*
 registros/*.depend*
 registros/*.o*
-
 registros/*.exe*
 
 
