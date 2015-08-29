@@ -1,7 +1,7 @@
 #include <stdint.h>
-uint32_t ADD(uint32_t Rm,uint32_t Rn,uint32_t Rd);
-uint32_t SUB(uint32_t Rm,uint32_t Rn,uint32_t Rd);
-uint32_t AND(uint32_t Rm,uint32_t Rn,uint32_t Rd);
-uint32_t ORR(uint32_t Rm,uint32_t Rn,uint32_t Rd);
-uint32_t EOR(uint32_t Rm,uint32_t Rn,uint32_t Rd);
-uint32_t MOV(uint32_t Rm,uint32_t Rn,uint32_t Rd);
+void ADD(uint32_t *Rm,uint32_t *Rn);
+void SUB(uint32_t *Rm,uint32_t *Rn);
+void AND(uint32_t *Rm,uint32_t *Rn);
+void ORR(uint32_t *Rm,uint32_t *Rn);
+void EOR(uint32_t *Rm,uint32_t *Rn);
+void MOV(uint32_t *Rm,uint32_t *Rn);

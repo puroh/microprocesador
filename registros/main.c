@@ -7,8 +7,8 @@
 
 int main(void)
 {
-   uint32_t registers[12],j;
-   if(!0){
-    printf("\n%d\n",sizeof(uint32_t));}
+   uint32_t registers[12],j=1;
+   registers[0]=2;
+   registers[1]=2;
    showRegisters(registers, 12);
 }

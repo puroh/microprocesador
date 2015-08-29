@@ -1,85 +1,83 @@
 #include <stdint.h>
-uint32_t ADD(uint32_t Rm,uint32_t Rn,uint32_t Rd)
-{
+void ADD(uint32_t *Rm,uint32_t *Rn){
     uint8_t C=0,Z=0,N=0,V=0;
-    Rd=Rm+Rn;
-    if(Rm>=2147483648&&Rn<2147483648&&Rd<2147483648){
+
+    *Rm=*Rm+*Rn;
+    if((*Rm<2147483648)&&(*Rn<2147483648||*Rn>=2147483648)){
         C=1;}
     printf("\nC:%d\n",C);
-    if(!Rd){
+    if(!*Rm){
         Z=1;
     }
     printf("\nZ:%d\n",Z);
-    return Rd;
 
 }
-uint32_t SUB(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+void SUB(uint32_t *Rm,uint32_t *Rn)
 {
-    uint8_t C=0,Z=0,N=0,V=0;
-    Rd=Rm-Rn;
-    if(Rm>=2147483648&&Rn<2147483648&&Rd<2147483648){
+     uint8_t C=0,Z=0,N=0,V=0;
+
+    *Rm=*Rm-(~*Rn+1);
+    if(*Rm==~*Rn){
         C=1;}
     printf("\nC:%d\n",C);
-    if(!Rd){
+    if(!*Rm){
         Z=1;
     }
     printf("\nZ:%d\n",Z);
-    return Rd;
 
 }
-uint32_t AND(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+void AND(uint32_t *Rm,uint32_t *Rn)
 {
-    uint8_t C=0,Z=0,N=0,V=0;
-    Rd=Rm&Rn;
-    if(Rm>=2147483648&&Rn<2147483648&&Rd<2147483648){
+     uint8_t C=0,Z=0,N=0,V=0;
+
+    *Rm=*Rm&*Rn;
+    if(*Rm<2147483648&&(*Rn<2147483648||*Rn>=2147483648)){
         C=1;}
     printf("\nC:%d\n",C);
-    if(!Rd){
+    if(!*Rm){
         Z=1;
     }
     printf("\nZ:%d\n",Z);
-    return Rd;
 
 }
-uint32_t ORR(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+void ORR(uint32_t *Rm,uint32_t *Rn)
 {
-    uint8_t C=0,Z=0,N=0,V=0;
-    Rd=Rm|Rn;
-    if(Rm>=2147483648&&Rn<2147483648&&Rd<2147483648){
+     uint8_t C=0,Z=0,N=0,V=0;
+
+    *Rm=*Rm|*Rn;
+    if(*Rm<2147483648&&(*Rn<2147483648||*Rn>=2147483648)){
         C=1;}
     printf("\nC:%d\n",C);
-    if(!Rd){
+    if(!*Rm){
         Z=1;
     }
     printf("\nZ:%d\n",Z);
-    return Rd;
 
 }
-uint32_t EOR(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+void EOR(uint32_t *Rm,uint32_t *Rn)
 {
-    uint8_t C=0,Z=0,N=0,V=0;
-    Rd=Rm^Rn;
-    if(Rm>=2147483648&&Rn<2147483648&&Rd<2147483648){
+     uint8_t C=0,Z=0,N=0,V=0;
+
+    *Rm=*Rm^*Rn;
+    if(*Rm<2147483648&&(*Rn<2147483648||*Rn>=2147483648)){
         C=1;}
     printf("\nC:%d\n",C);
-    if(!Rd){
+    if(!*Rm){
         Z=1;
     }
     printf("\nZ:%d\n",Z);
-    return Rd;
 
 }
-uint32_t MOV(uint32_t Rm,uint32_t Rn,uint32_t Rd)
+void MOV(uint32_t *Rm,uint32_t *Rn)
 {
     uint8_t C=0,Z=0,N=0,V=0;
-    Rd=Rm<<Rn;
-    if(Rm>=2147483648&&Rn<2147483648&&Rd<2147483648){
+    Rn=Rm;//Rm lo manda a Rn
+    if(*Rm<2147483648&&(*Rn<2147483648||*Rn>=2147483648)){
         C=1;}
     printf("\nC:%d\n",C);
-    if(!Rd){
+    if(!*Rm){
         Z=1;
     }
     printf("\nZ:%d\n",Z);
-    return Rd;
 }
 
