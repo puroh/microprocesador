@@ -1,4 +1,5 @@
 #include "screen.h"
+#include "curses.h"
 
 void showRegisters(unsigned long int *registers, size_t len)
 {
@@ -14,9 +15,13 @@ void showRegisters(unsigned long int *registers, size_t len)
 		if( (i % 4) == 0 )
 			printf("\n");
 		SetConsoleTextAttribute(hCon,GREEN);
-		printf("R%-2d:", i);
+		attron(COLOR_PAIR(1));
+		printw("R%-2d:", i);
+		refresh();
 		SetConsoleTextAttribute(hCon,WHITE);
-		printf("%.8X\t", registers[i]);
+		attron(COLOR_PAIR(2));
+		printw("%.8X\t", registers[i]);
+		refresh();
 	}
 	printf("\n");
 
