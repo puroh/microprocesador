@@ -1,4 +1,9 @@
 #include <stdint.h>
+
+#define C 0
+#define Z 1
+#define N 2
+#define V 3
 /**
 *	\brief Función que suma
 *	\param Rm Operador con signo de 32 bits

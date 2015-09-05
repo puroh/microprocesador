@@ -40,7 +40,7 @@ void MVN(uint32_t *Rm,uint32_t *Rn)
 }
 void RSBS(uint32_t *Rm,uint32_t *Rn)
 {
-	*Rm=0-*Rn;
+	*Rm=(~*Rn)+1;
 }
 void NOP(void)
 {
