@@ -2,9 +2,11 @@
 *.o*
 *.depend*
 *.layout*
+*.cbp*
 registros/*.layout*
 registros/*.depend*
 registros/*.o*
 registros/*.exe*
+registros/*.cbp*
 
 
