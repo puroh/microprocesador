@@ -103,5 +103,8 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas) /* Define las d
 	}
 	printf("N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]); /* Imprime en pantalla los valores de las banderas */
 >>>>>>> 7c295bee51a224504be293f9d34bc542542d3186
+<<<<<<< HEAD
+>>>>>>> bavv326-actualizacion_4
+=======
 >>>>>>> bavv326-actualizacion_4
 }
