@@ -1,44 +1,39 @@
 #include <stdint.h>
-
-#define C 0
-#define Z 1
-#define N 2
-#define V 3
 /**
 *	\brief Función que suma
 *	\param Rm Operador con signo de 32 bits
 *	\param Rn Operador con signo de 32 bits
 *	\return Rd Un entero con signo de 32 bits que contiene el resultado
 */
-void ADD(uint32_t *Rm,uint32_t *Rn);
+void ADD(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 /**
 *	\brief Función que resta
 *	\param Rm Operador con signo de 32 bits
 *	\param Rn Operador con signo de 32 bits
 *	\return Rd Un entero con signo de 32 bits que contiene el resultado
 */
-void SUB(uint32_t *Rm,uint32_t *Rn);
+void SUB(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 /**
 *	\brief Función que multiplica
 *	\param Rm Operador con signo de 32 bits
 *	\param Rn Operador con signo de 32 bits
 *	\return Rd Un entero con signo de 32 bits que contiene el resultado
 */
-void AND(uint32_t *Rm,uint32_t *Rn);
+void AND(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 /**
 *	\brief Función de suma lógica
 *	\param Rm Operador con signo de 32 bits
 *	\param Rn Operador con signo de 32 bits
 *	\return Rd Un entero con signo de 32 bits que contiene el resultado
 */
-void ORR(uint32_t *Rm,uint32_t *Rn);
+void ORR(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 /**
 *	\brief Función lógica exclusiva
 *	\param Rm Operador con signo de 32 bits
 *	\param Rn Operador con signo de 32 bits
 *	\return Rd Un entero con signo de 32 bits que contiene el resultado
 */
-void EOR(uint32_t *Rm,uint32_t *Rn);
+void EOR(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 /**
 *	\brief Función que mueve un registro a otro
 *	\param R0 Operando 1
@@ -46,3 +41,4 @@ void EOR(uint32_t *Rm,uint32_t *Rn);
 *	\return Rd Un entero sin signo con el resultado
 */
 void MOV(uint32_t *Rm,uint32_t *Rn);
+void CMP(uint32_t *Rm,uint32_t *Rn);

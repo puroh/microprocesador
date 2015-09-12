@@ -1,10 +1,19 @@
-CC = gcc
-CFLAGS=	-O3	-c -Wall
+cc = gcc
+CFLAGS = -O3 -c -Wall
 
-all:	object
-	$(CC)	-o	main*.o
+all:	obj 
+	rm -f test.o
+	$(cc) -o main.exe *.o
+	rm -f *.o	
 
-object:
-	$(CC)	$(CFLAGS) *.c
+test:	obj
+	rm -f main.o
+	$(cc) -o test.exe *.o
+	rm -f *.o	
+
+obj:
+	$(cc) $(CFLAGS) *.c
+
 clean:
-	rm main$
+	rm -f main.exe
+	rm -f test.exe

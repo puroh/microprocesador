@@ -1,27 +1,31 @@
 #include <stdint.h>
-#include <stdbool.h>
 #include "alu.h"
-void flag(uint32_t *Rm){
-uint32_t x;
-x=1;
-bool flags[3];
+#include <stdint.h>
+#include <stdbool.h>
+#include "flags.h"
 
-if(((*Rm<<32)>>32)&1==1)
-    flags[N]=1;
+void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas){
+
+if(*Rd>((1<<31)-1))
+    banderas[N]=1;
 else
-    flags[N]=0;
+    banderas[N]=0;
 
-if(!*Rm)
-    flags[Z]=1;
+if(!*Rd)
+    banderas[Z]=1;
 else
-    flags[Z]=0;
+    banderas[Z]=0;
 
-if(*Rm>(x<<32))
-    flags[C]=1;
+if(((*Rm>=(1<<31)-1)^(*Rn<0))&&((*Rn>=(1<<31)-1)^(*Rm<0)))
+    banderas[C]=1;
 else
-    flags[C]=0;
+    banderas[C]=0;
 
+if((((*Rm&(1<<31))==(1<<31)&&(*Rn&(1<<31))==(1<<31))&&((*Rd&(1<<31))==0))&&(((*Rm&(1<<31))==0&&(*Rn&(1<<31))==0&&((*Rd&(1<<31))==(1<<31)))))
+    banderas[V]=1;
 
-move(6,15);
-printw("signo %d zero %d acarreo %d\n",flags[N],flags[Z],flags[C]);
+else
+    banderas[V]=0;
+
+  printf("N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 }

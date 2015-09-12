@@ -1,37 +1,55 @@
 #include <stdint.h>
+#include <stdbool.h>
 
-void ADD(uint32_t *Rm,uint32_t *Rn)
+bool banderas[3];
+void obtenerBandera(bool *bands)
 {
-    *Rm=*Rm+*Rn;
-    flag(Rm);
+    bands=banderas;
 }
-void SUB(uint32_t *Rm,uint32_t *Rn)
-{
-    *Rm=*Rm+((~*Rn)+1);
 
+void ADD(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
+{
+    *Rd=*Rm+*Rn;
+     flag(Rd,Rm,Rn,banderas);
 }
-void AND(uint32_t *Rm,uint32_t *Rn)
+void SUB(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
 {
-
-    *Rm=*Rm&*Rn;
-
-}
-void ORR(uint32_t *Rm,uint32_t *Rn)
-{
-
-    *Rm=*Rm|*Rn;
+    *Rd=*Rm+((~*Rn)+1);
+    flag(Rd,Rm,Rn,banderas);
 
 }
-void EOR(uint32_t *Rm,uint32_t *Rn)
+void AND(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
 {
 
-    *Rm=*Rm^*Rn;
+    *Rd=*Rm&*Rn;
+    flag(Rd,Rm,Rn,banderas);
+
+}
+void ORR(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
+{
+
+    *Rd=*Rm|*Rn;
+    flag(Rd,Rm,Rn,banderas);
+
+}
+void EOR(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
+{
+
+    *Rd=*Rm^*Rn;
+    flag(Rd,Rm,Rn,banderas);
 
 }
 void MOV(uint32_t *Rm,uint32_t *Rn)
 {
 
-    Rn=Rm;
+    *Rm=*Rn;
 
 }
+void CMP(uint32_t *Rm,uint32_t *Rn)
+{
+    uint32_t R;
+    R=*Rm+((~*Rn)+1);
+    flag(&R,Rm,Rn,banderas);
+}
+
 
