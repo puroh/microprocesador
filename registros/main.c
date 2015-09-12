@@ -7,7 +7,7 @@
 
 int main(void)
 {
- initscr();		/* Inicia modo curses */
+	initscr();		/* Inicia modo curses */
 	curs_set(0);	/* Cursor Invisible */
 	raw();			/* Activa modo raw */
 	keypad(stdscr, TRUE);	/* Obtener F1, F2, etc */
@@ -19,11 +19,9 @@ int main(void)
 			ACS_HLINE, ACS_HLINE,
 			ACS_ULCORNER, ACS_URCORNER,
 			ACS_LLCORNER, ACS_LRCORNER	);
-
-
-   uint32_t registers[12];
-   showRegisters(registers, 12);
-    attroff(COLOR_PAIR(1));
+	uint32_t registers[12];
+	showRegisters(registers, 12);
+	attroff(COLOR_PAIR(1));
     attroff(COLOR_PAIR(2));
     getch();
     endwin();
