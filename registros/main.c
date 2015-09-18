@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 /****************************************************************
 *****************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include "curses.h"
-
-
-int main(void) {
-=======
+//#include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "screen.h"
