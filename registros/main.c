@@ -75,7 +75,7 @@ int main(void)
 void Disp(){
 	
 	//showRegisters(registers, 12);
-
+	int ch=0;
 
 		int i, num_instructions;
 		ins_t read;
@@ -109,8 +109,14 @@ while(pcou<memoria){
             
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
-            getch();
-            
+            ch = getch();
+			mvprintw(7,40,"%c",ch);
+			//timeout(1000);
+			if(ch=="u"){
+            timeout(1000);}
+            if(ch=="p"){
+            timeout(-1);}
+
             obtenerPC(&pcou);
 
         }
