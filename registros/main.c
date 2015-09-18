@@ -1,12 +1,12 @@
-/****************************************************************
-*****************************************************************/
-//#include <stdlib.h>
-#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <curses.h>
+#include <ncurses.h>
 #include "screen.h"
 #include "alu.h"
-#include "idd.h"
-#include "curses.h"
+#include "flags.h"
+
 
 #define NORMAL       0
 #define BRILLO       1
@@ -49,10 +49,11 @@ void IniVideo(){/*Para los colores */
 	         init_pair(5, COLOR_BLUE, COLOR_GREEN);
         }
         bkgd(COLOR_PAIR(5));/*color del fondo*/
+
 }
 
 
-Exit(){
+void Exit(){
         attroff(COLOR_PAIR(1));
         clear();
         refresh();
