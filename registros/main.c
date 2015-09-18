@@ -6,6 +6,7 @@
 #include "screen.h"
 #include "alu.h"
 #include "flags.h"
+#include "decoder.h"
 
 
 #define NORMAL       0
@@ -72,8 +73,53 @@ int main(void)
 }
 
 void Disp(){
-	uint32_t registers[12];
-	showRegisters(registers, 12);
+	
+	//showRegisters(registers, 12);
+
+
+		int i, num_instructions;
+		ins_t read;
+		char** instructions;
+		instruction_t instruction;
+		uint32_t pcou=0;
+		uint32_t memoria=500;
+		num_instructions = readFile("code.txt", &read);
+		if(num_instructions==-1)
+			return 0;
+
+		if(read.array==NULL)
+			return 0;
+
+		instructions = read.array; /* Arreglo con las instrucciones */
+
+
+
+
+	/* Ejemplo de uso
+		Llama la función que separa el mnemonico y los operandos
+		Llama la instrucción que decodifica y ejecuta la instrucción
+	*/
+	instruction = getInstruction(instructions[1]); /* Instrucción en la posición 0*/
+while(pcou<memoria){
+            if(pcou>=num_instructions){
+                mvprintw(LINES,COLS/2,"\nLimite de instrucciones alcanzado\n");
+                getch();
+                break;
+            }
+            
+            instruction = getInstruction(instructions[pcou]);
+            decodeInstruction(instruction);
+            getch();
+            
+            obtenerPC(&pcou);
+
+        }
+refresh();
+for(i=0; i<num_instructions;i++){
+		free(read.array[i]);
+	}
+	free(read.array);
+return 0;
 
 /************************************
 orden
@@ -86,14 +132,14 @@ MOV
 CMP
 
 
-/************************************/
+/************************************
 	attrset(COLOR_PAIR(1 ));
     mvprintw(2,40,"ADD\n");
 	attrset(COLOR_PAIR(2 ));
 	registers[2]=12;
 	registers[1]=2;
 	ADD(&registers[0],&registers[1],&registers[2]);
-/***************************************/
+/***************************************
 	attrset(COLOR_PAIR(1 ));
 	mvprintw(7,40,"Sub\n");
 	attrset(COLOR_PAIR(2 ));
@@ -102,7 +148,7 @@ CMP
 	attrset(COLOR_PAIR(5 ));
    SUB(&registers[0],&registers[0],&registers[1]);
    
-/***************************************/
+/***************************************
 /***************************************/
 /***************************************/
 /***************************************/

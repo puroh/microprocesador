@@ -29,6 +29,6 @@ else
             banderas[V]=0;
     }
 	attrset(COLOR_PAIR(2 ));
-	printf("N:%d Z:%d C:%d V:%d\n\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
+	mvprintw(3,40,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 }

@@ -172,7 +172,7 @@ void BL(uint32_t *pc,uint32_t valor)
 {
      LR=*pc+2;
      *pc+=valor*2;
-     printw("\nLR:%d\n",LR);
+     mvprintw(3,41,"LR:%d\n",LR);
 }
 void BX(uint32_t *pc)
 {
