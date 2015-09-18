@@ -7,7 +7,7 @@
 
 void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas) /* Define las direcciones de las variables que deteremina el valor de la banderas (C,Z y N) */
 {
-int n=0;
+int p=0;
 	if(*Rd>((1<<31)-1)) 
 	{
 		banderas[N]=1;
@@ -40,38 +40,43 @@ int n=0;
 	{
 		banderas[V]=0;
 	}
-	
-
-if (n==0){/*add*/
-  	mvprintw(3,41,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
+	attrset(COLOR_PAIR(2 ));
+	printw("p:%d N:%d Z:%d C:%d V:%d\n",p,banderas[N],banderas[Z],banderas[C],banderas[V]);
+	refresh();
+/*
+if (p==0){/*add*
+	attrset(COLOR_PAIR(2 ));
+  	mvprintw(3,41,"p:%d N:%d Z:%d C:%d V:%d\n",p,banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-if(n==1){/*SUB*/
-  	mvprintw(14,41,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
+if(p==1){/*SUB*
+	attrset(COLOR_PAIR(2 ));
+  	mvprintw(8,41,"aaN:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-if(n==2){/*AND*/
+if(p==2){/*AND*
+	attrset(COLOR_PAIR(2 ));
   	mvprintw(18,41,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-if(n==3){/*ORR*/
+if(p==3){/*ORR*
   	mvprintw(21,41,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-if(n==4){/*EOR*/
+if(p==4){/*EOR*
   	mvprintw(27,81,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-if(n==5){/*MOV*/
+if(p==5){/*MOV*
 	mvprintw(3,81,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-if(n==6){/*MOV*/
+if(p==6){/*MOV*
 	mvprintw(14,81,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]);
 	refresh();
 	}
-n++;
-if(n>6){
-	n=0;
-}
+p++;
+if(p>6){
+	p=0;
+}*/
 }

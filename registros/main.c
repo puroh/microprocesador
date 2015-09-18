@@ -88,11 +88,19 @@ CMP
 /************************************/
 	attrset(COLOR_PAIR(1 ));
     mvprintw(2,40,"ADD\n");
-	attrset(COLOR_PAIR(5 ));
+	attrset(COLOR_PAIR(2 ));
 	registers[2]=12;
 	registers[1]=2;
 	ADD(&registers[0],&registers[1],&registers[2]);
 /***************************************/
+	attrset(COLOR_PAIR(1 ));
+	mvprintw(7,40,"Sub\n");
+	attrset(COLOR_PAIR(2 ));
+	registers[0]=24;
+   registers[1]=68;
+	attrset(COLOR_PAIR(5 ));
+   SUB(&registers[0],&registers[0],&registers[1]);
+   
 /***************************************/
 /***************************************/
 /***************************************/
