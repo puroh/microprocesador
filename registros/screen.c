@@ -1,9 +1,10 @@
+#include <stdint.h>
 #include "screen.h"
 #include "curses.h"
 
-void showRegisters(unsigned long int *registers, size_t len)
+void showRegisters(uint32_t *registers, size_t len)
 {
-	int i;
+	/*int i;
 
 	HANDLE hCon=GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -14,8 +15,8 @@ void showRegisters(unsigned long int *registers, size_t len)
 	{
 		if( (i % 4) == 0 )
 			printf("\n");
-		SetConsoleTextAttribute(hCon,GREEN);
 		attron(COLOR_PAIR(1));
+		move(i+1,4);
 		printw("R%-2d:", i);
 		refresh();
 		SetConsoleTextAttribute(hCon,WHITE);
@@ -23,7 +24,5 @@ void showRegisters(unsigned long int *registers, size_t len)
 		printw("%.8X\t", registers[i]);
 		refresh();
 	}
-	printf("\n");
-
-	return;
+	printf("\n");*/
 }

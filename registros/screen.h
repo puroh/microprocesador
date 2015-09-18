@@ -8,6 +8,6 @@
 
 #include "colors.h"
 
-void showRegisters(unsigned long int *registers, size_t len);
+void showRegisters(uint32_t *registers, size_t len);
 
 #endif	/* _SCREEN_H_ */

@@ -1,12 +1,11 @@
-
-#include <stdint.h>
+/****************************************************************
+*****************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
-#include "screen.h"
-#include "alu.h"
-#include "idd.h"
+#include <stdint.h>
+#include "curses.h"
 
-int main(void)
-{
- test();
+
+int main(void) {
+    return 0;
 }
