@@ -28,6 +28,6 @@ int main(void)
     attroff(COLOR_PAIR(2));
     getch();
     endwin();
->>>>>>> master
+
     return 0;
 }
