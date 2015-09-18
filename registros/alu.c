@@ -1,6 +1,5 @@
 #include <stdint.h>
 #include <stdbool.h>
-<<<<<<< HEAD
 #include "flags.h"
 
 bool banderas[4];
@@ -65,13 +64,7 @@ void EOR(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
     flag(Rd,Rm,Rn,banderas,&comp);
 }
 
-void CMP(uint32_t *Rm,uint32_t *Rn)
-{
-    uint32_t R;
-    R=*Rm+((~*Rn)+1);
-    comp=0;
-     flag(&R,Rm,Rn,banderas,&comp);
-}
+
 void ADCS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
 {
     *Rd=*Rm+*Rn+banderas[C];
@@ -129,9 +122,10 @@ void LSR(uint32_t *Rm,uint32_t *Rn)
 void ROR(uint32_t *Rm,uint32_t *Rn)
 {
 
-   *Rm=*Rm>>32;
-   *Rn=*Rn<<32;
-   *Rm=*Rm||*Rn;
+   *Rn=*Rm;
+   *Rm=*Rm>>16;  /*modificado 1:57 pm 18 de septiembre*/
+   *Rn=*Rn<<16;
+   *Rm=(*Rm|*Rn);
    comp=1;
    flag(Rm,Rm,Rn,banderas,&comp);
 
@@ -139,8 +133,9 @@ void ROR(uint32_t *Rm,uint32_t *Rn)
 void ASRS(uint32_t *Rm,uint32_t *Rn)
 {
 
-   *Rn=~0<<(32-*Rn);
-   *Rm=(*Rm>>1)|*Rn;
+   *Rm=(*Rm>>*Rn);
+   *Rn=~0<<(32-*Rn);    /*modificado 1:57 pm 18 de septiembre*/
+   *Rm|=*Rn;
    comp=1;
    flag(Rm,Rm,Rn,banderas,&comp);
 
@@ -166,11 +161,9 @@ void CMP(uint32_t *Rm,uint32_t *Rn)
 	mvprintw(23,41,"Resultado= %d", *Rm);
 	refresh();
 	move();
-    flag(&R,Rm,Rn,banderas);
+     flag(&R,Rm,Rn,banderas,&comp);
 }
 
-
-}
 void REV(uint32_t *Rm,uint32_t *Rn)
 {
     *Rn=*Rm<<24;

@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 #include <stdint.h>
+/*
 void B(uint32_t *pc,uint32_t valor);
 void BEQ(uint32_t *pc,uint32_t valor);
 void BNE(uint32_t *pc,uint32_t valor);
@@ -17,8 +17,8 @@ void BGT(uint32_t *pc,uint32_t valor);
 void BLE(uint32_t *pc,uint32_t valor);
 void BAL(uint32_t *pc,uint32_t valor);
 void BL(uint32_t *pc,uint32_t valor);
-void BX(uint32_t *pc);
-=======
+void BX(uint32_t *pc);*/
+
 /**
 *	\brief Función.
 *	\param pc.
@@ -114,4 +114,4 @@ void BLE(uint32_t *pc,uint32_t valor);
 *	\param valor.
 */
 void BAL(uint32_t *pc,uint32_t valor);
->>>>>>> master
+

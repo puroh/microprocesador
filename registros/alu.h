@@ -84,8 +84,8 @@ void RSBS(uint32_t *Rm,uint32_t *Rn);
 
 void NOP(void);
 void MOV(uint32_t *Rm,uint32_t *Rn);
-<<<<<<< HEAD
-void CMP(uint32_t *Rm,uint32_t *Rn);
+
+
 void ADCS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 void CMN(uint32_t *Rm,uint32_t *Rn);
 void SBC(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
@@ -96,11 +96,11 @@ void TST(uint32_t *Rm,uint32_t *Rn);
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 
-=======
+
 /**
 *	\brief Función.
 *	\param Rm Operando sin signo de 32 bits.
 *	\param Rn Operando sin signo de 32 bits.
 */
 void CMP(uint32_t *Rm,uint32_t *Rn);
->>>>>>> master
+

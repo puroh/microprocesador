@@ -1,9 +1,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
+#include <curses.h>
 #include "alu.h"
-<<<<<<< HEAD
 #include "salto.h"
 #include "decoder.h"
 
@@ -36,19 +35,19 @@ int main(void){
 	*/
 	instruction = getInstruction(instructions[1]); /* Instrucción en la posición 0*/
      for(i=0; i<num_instructions;i++){
-		printf("\ninstruccion %d : %s",i,instructions[i]);
+		printw("\ninstruccion %d : %s",i,instructions[i]);
 	}
         while(pcou<memoria){
             if(pcou>=num_instructions){
-                printf("\nLimite de instrucciones alcanzado\n");
+                printw("\nLimite de instrucciones alcanzado\n");
                 getch();
                 break;
             }
-            printf("\n_________________________________\n");
+            printw("\n_________________________________\n");
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
             getch();
-            printf("\n_________________________________\n");
+            printw("\n_________________________________\n");
             obtenerPC(&pcou);
 
         }
@@ -58,6 +57,7 @@ int main(void){
 		free(read.array[i]);
 	}
 	free(read.array);
+/*
 =======
 #include "idd.h"
 #include <curses.h>
@@ -94,6 +94,6 @@ int main(void){
    printw("CMP=");
    CMP(&registers[0],&registers[1]);
 >>>>>>> master
-   return 0;
+   return 0;*/
 }
 
