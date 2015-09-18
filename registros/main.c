@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+/****************************************************************
+*****************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include "curses.h"
+
+
+int main(void) {
+=======
 #include <stdint.h>
 #include <stdio.h>
 #include "screen.h"
@@ -25,5 +36,6 @@ int main(void)
     attroff(COLOR_PAIR(2));
     getch();
     endwin();
+>>>>>>> master
     return 0;
 }

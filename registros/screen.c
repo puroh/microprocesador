@@ -4,7 +4,7 @@
 
 void showRegisters(uint32_t *registers, size_t len)
 {
-	int i;
+	/*int i;
 
 	HANDLE hCon=GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -24,7 +24,5 @@ void showRegisters(uint32_t *registers, size_t len)
 		printw("%.8X\t", registers[i]);
 		refresh();
 	}
-	printf("\n");
-
-	return;
+	printf("\n");*/
 }
