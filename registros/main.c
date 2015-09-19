@@ -48,7 +48,7 @@ void IniVideo(void){/*Para los colores */
 	         init_pair(1, COLOR_RED, COLOR_GREEN);
 	         init_pair(2, COLOR_WHITE, COLOR_GREEN);
 	         init_pair(3, COLOR_GREEN, COLOR_BLACK);
-	         init_pair(4, COLOR_WHITE, COLOR_RED);
+	         init_pair(4, COLOR_RED, COLOR_WHITE);
 	         init_pair(5, COLOR_BLUE, COLOR_GREEN);
         }
         bkgd(COLOR_PAIR(5));/*color del fondo*/
@@ -59,32 +59,30 @@ void IniVideo(void){/*Para los colores */
 void Exit(void){
         
         clear();
-        refresh();
-        endwin();
-        exit(1);
+        endwin();/*finaliza la muestra de curses*/
+        exit(1);/*cierra el programa*/
 }
 
 
 
 int main(void)
 {
-	IniVideo();  
-	Disp();     
-    Exit();  
+	IniVideo();  /*funcion para configurar colores y el modo de visualizado*/
+	Disp();     /*Funcion en donde se realizan las operaciones*/
+    Exit();  	/*Funcion para finalizar el programa*/
     return 0;  
 }
 
 int Disp(void){
 	
 	
-	char ch='0';
-
-		int i, num_instructions;
-		ins_t read;
+		char ch='0';				/*declaracion de variable tipo char para realizar acciones con el teclado	*/
+		int i, num_instructions; 	/*declaracion de variables*/
+		ins_t read;					
 		char** instructions;
 		instruction_t instruction;
-		uint32_t pcou=0;
-		uint32_t memoria=500;
+		uint32_t pcou=0;			/*contador de direccion de operacion*/
+		uint32_t memoria=500;		/*cantidad maxima de instrucciones*/
 		num_instructions = readFile("code.txt", &read);
 		if(num_instructions==-1)
 			return 0;
@@ -104,26 +102,37 @@ int Disp(void){
 	instruction = getInstruction(instructions[1]); /* Instrucción en la posición 0*/
 while(pcou<memoria){
             if(pcou>=num_instructions){
-                mvprintw(LINES,COLS/2,"\nLimite de instrucciones alcanzado\n");
+                mvprintw(LINES-3,COLS/2,"Limite de instrucciones alcanzado");
                 getch();
                 break;
             }
             
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
-            ch = getch();
-			if(ch=='u'){
-			timeout(1000);}
-            if(ch=='p'){
-            timeout(-1);}
-			if(ch=='q'){
-			Exit();
+            ch = getch();		/*obtiene el valor de la tecla presionada*/
+			if(ch=='u'){ 		/*valida si la tecla presionada es u*/
+			attrset(COLOR_PAIR(4 ));
+			mvprintw(LINES-2,COLS/8,"Correr = u");
+			refresh();			
+			timeout(1000);					
+			}		/*instruccion que permite seguir ejecutando el codigo aun si no se esta presionando*/
+            if(ch=='p'){		/*valida si la tecla presionada es p*/
+            timeout(-1);}		/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
+			if(ch=='q'){		/*valida si la tecla presionada es q*/
+			Exit();				/*llama la funcion de salida, la que cierra el programa*/
 			}
 			
+/*
+mvprintw(LINES-2,COLS/8,"Correr = u");
+mvprintw(LINES-2,COLS/2-4,"Parar = p");
+mvprintw(LINES-2,COLS*6/8,"Salir = q");
+
+
+*/
             obtenerPC(&pcou);
 
         }
-refresh();
+		refresh();				/*muestra en pantalla los cambias que se hayan realizado anteriormente*/
 for(i=0; i<num_instructions;i++){
 		free(read.array[i]);
 	}

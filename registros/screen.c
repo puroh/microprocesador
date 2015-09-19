@@ -8,7 +8,7 @@ void showRegisters(uint32_t *registers, size_t len)
 	int i;
 	move(0,COLS/2-15);
 	attron(COLOR_PAIR(3));
-	printw("Emulador procesador Cortex M0 %d ",COLS);
+	printw("  Emulador procesador Cortex M0  ");
 	mvprintw(2,2,"Registros ");
 	mvprintw(LINES-2,COLS/8,"Correr = u");
 	mvprintw(LINES-2,COLS/2-4,"Parar = p");

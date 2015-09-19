@@ -11,79 +11,79 @@
 void decodeInstruction(instruction_t instruction)
 {
 	attron(COLOR_PAIR(2));
-    mvprintw(4,40,"Valor de PC %d\n",pc);
+    mvprintw(4,40,"Valor de PC %d",pc);
     if(strncmp(instruction.mnemonic,"B",1)==0){
         if( strcmp(instruction.mnemonic,"BNE") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               BNE(&pc,instruction.op1_value);
                                                      }
         if( strcmp(instruction.mnemonic,"B") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
 
                                                      }
         if( strcmp(instruction.mnemonic,"BEQ") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BCS") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               BCS(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BCC") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               BCC(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BMI") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BPL") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               BPL(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BVS") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BVC") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BHI") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BLS") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BGE") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BLT") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BGT") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BLE") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BAL") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               B(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BL") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+              mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
               BL(&pc,instruction.op1_value);
                                                         }
         if( strcmp(instruction.mnemonic,"BX") == 0 ){
-              mvprintw(5,40,"Instruccion :%s %c\n",instruction.mnemonic,instruction.op1_type);
+              mvprintw(5,40,"Instruccion :%s %c",instruction.mnemonic,instruction.op1_type);
               BX(&pc);
                                                         }
 
@@ -95,132 +95,132 @@ void decodeInstruction(instruction_t instruction)
 
 
 	if( strcmp(instruction.mnemonic,"ADD") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           ADD(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
     if( strcmp(instruction.mnemonic,"SUB") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           SUB(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"AND") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           AND(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"ORR") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           ORR(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"EOR") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           EOR(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"MOV") == 0 ){
-	       mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	       mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
            MOV(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-            mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+            mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"CMP") == 0 ){
-                 mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+                 mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
                  CMP(&registers[instruction.op1_value],&registers[instruction.op2_value]);
 	}
 	if( strcmp(instruction.mnemonic,"ADCS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           ADCS(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"CMN") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           CMN(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"SBC") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           SBC(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"MOVS") == 0 ){
-           mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+           mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
            MOVS(&registers[instruction.op1_value],instruction.op2_value);
-           mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+           mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"SUBS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           SUBS(&registers[instruction.op1_value],&registers[instruction.op2_value],instruction.op3_value);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"ADDS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           ADDS(&registers[instruction.op1_value],&registers[instruction.op2_value],instruction.op3_value);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"LSR") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           LSR(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"LSL") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           LSL(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"ROR") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           ROR(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"ASRS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           ASRS(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"REV") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           REV(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"REV16") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           REV16(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"BIC") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           BIC(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"MVN") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           MVN(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"RSBS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           RSBS(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 	if( strcmp(instruction.mnemonic,"NOP") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s\n",instruction.mnemonic);
+	      mvprintw(5,40,"Instruccion :%s",instruction.mnemonic);
           NOP();
 	}
 	if( strcmp(instruction.mnemonic,"TST") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
           TST(&registers[instruction.op1_value],&registers[instruction.op2_value]);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
     if( strcmp(instruction.mnemonic,"LSLS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           LSLS(&registers[instruction.op1_value],&registers[instruction.op2_value],instruction.op3_value);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
     if( strcmp(instruction.mnemonic,"LSRS") == 0 ){
-	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           LSRS(&registers[instruction.op1_value],&registers[instruction.op2_value],instruction.op3_value);
-          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);
 	}
 showRegisters(registers,12);
 }

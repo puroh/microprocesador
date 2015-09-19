@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "flags.h"
 
-bool banderas[3];
+bool banderas[4];
 uint8_t comp=0;
 void ADD(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
 {
