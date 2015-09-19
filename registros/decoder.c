@@ -88,7 +88,7 @@ void decodeInstruction(instruction_t instruction)
         if( strcmp(instruction.mnemonic,"BLE") == 0 ) /*compara el mnemonico con BLE*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
-            LE(&pc,instruction.op1_value);/*ejecuta la funcion BLE en salto.c*/
+            BLE(&pc,instruction.op1_value);/*ejecuta la funcion BLE en salto.c*/
         }
         if( strcmp(instruction.mnemonic,"BAL") == 0 ) /*compara el mnemonico con BAL*/
 		{

@@ -50,6 +50,7 @@ void IniVideo(void){/*Para los colores */
 	         init_pair(3, COLOR_GREEN, COLOR_BLACK);
 	         init_pair(4, COLOR_RED, COLOR_WHITE);
 	         init_pair(5, COLOR_BLUE, COLOR_GREEN);
+			 init_pair(6, COLOR_GREEN, COLOR_GREEN);
         }
         bkgd(COLOR_PAIR(5));/*color del fondo*/
 
@@ -112,18 +113,28 @@ while(pcou<memoria){
             ch = getch();		/*obtiene el valor de la tecla presionada*/
 			if(ch=='u'){ 		/*valida si la tecla presionada es u*/
 			attrset(COLOR_PAIR(4 ));
-			mvprintw(LINES-2,COLS/8,"Correr = u");
+			mvprintw(LINES-2,COLS/8-2,"  ");
+			attrset(COLOR_PAIR(6 ));
+			mvprintw(LINES-2,COLS/2-6,"  ");
 			refresh();			
 			timeout(1000);					
 			}		/*instruccion que permite seguir ejecutando el codigo aun si no se esta presionando*/
             if(ch=='p'){		/*valida si la tecla presionada es p*/
-            timeout(-1);}		/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
+            timeout(-1);
+			attrset(COLOR_PAIR(4 ));
+			mvprintw(LINES-2,COLS/2-6,"    ");
+			attrset(COLOR_PAIR(6 ));
+			mvprintw(LINES-2,COLS/8-2,"    ");
+			refresh();
+
+
+}		/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
 			if(ch=='q'){		/*valida si la tecla presionada es q*/
 			Exit();				/*llama la funcion de salida, la que cierra el programa*/
 			}
 			
 /*
-mvprintw(LINES-2,COLS/8,"Correr = u");
+mvprintw(LINES-3,COLS/8,"Correr = u");
 mvprintw(LINES-2,COLS/2-4,"Parar = p");
 mvprintw(LINES-2,COLS*6/8,"Salir = q");
 
