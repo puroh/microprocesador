@@ -27,9 +27,11 @@
 #define MAXCAD 70
 
 WINDOW *win; /** manejaremos una única ventana de pantalla completa **/
+int Disp(void);
+void Inivideo(void);
+void Exit(void);
 
-
-void IniVideo(){/*Para los colores */
+void IniVideo(void){/*Para los colores */
 	win=initscr();/* Inicia modo curses */
 	clear();
 	refresh();
@@ -54,8 +56,8 @@ void IniVideo(){/*Para los colores */
 }
 
 
-void Exit(){
-        attroff(COLOR_PAIR(1));
+void Exit(void){
+        
         clear();
         refresh();
         endwin();
@@ -68,14 +70,14 @@ int main(void)
 {
 	IniVideo();  
 	Disp();     
-	getch();
-    Exit();    
+    Exit();  
+    return 0;  
 }
 
-void Disp(){
+int Disp(void){
 	
-	//showRegisters(registers, 12);
-	int ch=0;
+	
+	char ch='0';
 
 		int i, num_instructions;
 		ins_t read;
@@ -110,13 +112,14 @@ while(pcou<memoria){
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
             ch = getch();
-			mvprintw(7,40,"%c",ch);
-			//timeout(1000);
-			if(ch=="u"){
-            timeout(1000);}
-            if(ch=="p"){
+			if(ch=='u'){
+			timeout(1000);}
+            if(ch=='p'){
             timeout(-1);}
-
+			if(ch=='q'){
+			Exit();
+			}
+			
             obtenerPC(&pcou);
 
         }
@@ -125,48 +128,8 @@ for(i=0; i<num_instructions;i++){
 		free(read.array[i]);
 	}
 	free(read.array);
-return 0;
+	return 0;
 
-/************************************
-orden
-ADD
-SUB
-AND
-ORR
-EOR
-MOV
-CMP
-
-
-/************************************
-	attrset(COLOR_PAIR(1 ));
-    mvprintw(2,40,"ADD\n");
-	attrset(COLOR_PAIR(2 ));
-	registers[2]=12;
-	registers[1]=2;
-	ADD(&registers[0],&registers[1],&registers[2]);
-/***************************************
-	attrset(COLOR_PAIR(1 ));
-	mvprintw(7,40,"Sub\n");
-	attrset(COLOR_PAIR(2 ));
-	registers[0]=24;
-   registers[1]=68;
-	attrset(COLOR_PAIR(5 ));
-   SUB(&registers[0],&registers[0],&registers[1]);
-   
-/***************************************
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
-/***************************************/
 
 
 }

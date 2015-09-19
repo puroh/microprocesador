@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 /**
 *	\brief Función que suma.
 *	\param Rm Operador con signo de 32 bits.
@@ -103,4 +104,5 @@ void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 *	\param Rn Operando sin signo de 32 bits.
 */
 void CMP(uint32_t *Rm,uint32_t *Rn);
+void obtenerBandera(bool *bands);
 

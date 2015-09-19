@@ -114,4 +114,7 @@ void BLE(uint32_t *pc,uint32_t valor);
 *	\param valor.
 */
 void BAL(uint32_t *pc,uint32_t valor);
+void BNE(uint32_t *pc,uint32_t valor);
+void BL(uint32_t *pc,uint32_t valor);
+void BX(uint32_t *pc);
 
