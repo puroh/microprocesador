@@ -2,11 +2,9 @@
 #include <stdbool.h>
 #include "flags.h"
 
-
 bool banderas[4]; /* Declara banderas booleanas*/
 uint8_t comp=0; /* Variable que se crea para no modificar algunas banderas */
 void ADD(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero internamente realiza la operación suma */
-
 {
     *Rd=*Rm+*Rn; /* Suma entre las direcciones que contiene  el valor de los registros a operar */
 	comp=0; /* Modifica todas las banderas */
