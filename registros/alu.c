@@ -167,3 +167,9 @@ void obtenerBandera(bool *bands) /* Función que se crea para modificar las band
 {
     bands=banderas; /* Manda al archivo salto la modificación de las banderas */
 }
+void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
+{
+    *Rd=*Rm*(*Rn);
+    comp=0;
+     flag(Rd,Rm,Rn,banderas,&comp);
+}

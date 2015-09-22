@@ -105,4 +105,5 @@ void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 */
 void CMP(uint32_t *Rm,uint32_t *Rn);
 void obtenerBandera(bool *bands);
+void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 

@@ -40,6 +40,7 @@ void decodeInstruction(instruction_t instruction)
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
             BCC(&pc,instruction.op1_value);/*ejecuta la operacion BCC de salto.c*/
         }
+
         if( strcmp(instruction.mnemonic,"BMI") == 0 ) /*compara el mnemonico con BMI*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
@@ -115,6 +116,12 @@ void decodeInstruction(instruction_t instruction)
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
         ADD(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);/*ejecuta la funcion ADD localizada en alu.c*/
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
+	}
+
+	if( strcmp(instruction.mnemonic,"MULS") == 0 ){
+	      printf("instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+          MULS(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
+          printf("valor del registro %d\n",registers[instruction.op1_value]);
 	}
     if( strcmp(instruction.mnemonic,"SUB") == 0 ) /* compara el mnemonico con SUB*/
 	{
