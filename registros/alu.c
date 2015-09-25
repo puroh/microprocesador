@@ -75,7 +75,7 @@ void ADDS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, per
 void LSL(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la derecha */
 {
 	*Rm=*Rm<<*Rn; /* Desplaza a la izquierda el dato de la dirección Rm tantas veces sea el valor de la dirección Rn*/
-	comp=1; /* Modifica solo una bandera */
+	comp=3; /* Modifica solo una bandera */
 	flag(Rm,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void LSR(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la izquierda */ 
@@ -154,14 +154,15 @@ void TST(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza la 
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la izquierda de un valor inmediato */
 {
 	*Rd=*Rm<<Rn; /* Desplaza el valor en la dirección Rm las veces del valor inmediato Rn */
-	comp=1; /* Modifica solo una bandera */
+	comp=3; /* Modifica solo una bandera */
 	flag(Rd,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la derecha de un valor inmediato */
 {
+
 	*Rd=*Rm>>Rn; /* Desplaza el valor en la dirección Rm las veces del valor inmediato Rn */
 	comp=1; /* Modifica solo una bandera */
-	flag(Rm,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+	flag(Rd,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void obtenerBandera(bool *bands) /* Función que se crea para modificar las banderas en otros archivos dentro del proyecto */
 {
@@ -169,7 +170,7 @@ void obtenerBandera(bool *bands) /* Función que se crea para modificar las band
 }
 void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
 {
-    *Rd=*Rm*(*Rn);
+    *Rd=(*Rm)*(*Rn);
     comp=0;
      flag(Rd,Rm,Rn,banderas,&comp);
 }

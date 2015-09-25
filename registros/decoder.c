@@ -119,9 +119,9 @@ void decodeInstruction(instruction_t instruction)
 	}
 
 	if( strcmp(instruction.mnemonic,"MULS") == 0 ){
-	      printf("instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	      mvprintw(5,40,"instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
           MULS(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);
-          printf("valor del registro %d\n",registers[instruction.op1_value]);
+          mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);
 	}
     if( strcmp(instruction.mnemonic,"SUB") == 0 ) /* compara el mnemonico con SUB*/
 	{

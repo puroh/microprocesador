@@ -44,7 +44,21 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
             banderas[V]=0; /* En el caso de no cumplir con la condición */
 		}
     }
+
+	if( *compar==3 ){
+	if((*Rm & 1<<31)>=(1<<31)){	
+	banderas[C]=1;
+	}
+	}
+
+/***********************/
+/* Muestra las banderas*/
+
 	attrset(COLOR_PAIR(2 )); /* Permite cambiar el color a los textos */
 	mvprintw(7,40,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]); /* Imprime el valor de las banderas en una interfaz, mediante el uso de la libreria curses */
 	refresh(); /* Código sirve para ser uso de printw */
+/***********************/
 }
+
+
+
