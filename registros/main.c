@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <curses.h>
-#include <ncurses.h>
 #include "screen.h"
 #include "alu.h"
 #include "flags.h"

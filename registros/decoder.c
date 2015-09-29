@@ -4,13 +4,13 @@
 #include <stdint.h>
 #include "screen.h"
 
-    uint32_t registers[15];//
+    uint32_t registers[15];
     uint32_t pc=0,LR;/*se define el program counter y el LR que se modifica con BL*/
 
 
 void obtener_registros(uint32_t *registros)
 {
-      *registros=registers;//
+      registros=registers;
 
 }
 
