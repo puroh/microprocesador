@@ -83,7 +83,7 @@ int Disp(void){
 		instruction_t instruction;
 		uint32_t pcou=0;			/*contador de direccion de operacion*/
 		uint32_t memoria=500;		/*cantidad maxima de instrucciones*/
-		num_instructions = readFile("prueba_1.txt", &read);
+		num_instructions = readFile("code.txt", &read);
 		if(num_instructions==-1)
 			return 0;
 
@@ -106,7 +106,7 @@ while(pcou<memoria){
                 getch();
                 break;
             }
-            
+            int inicia_ram();
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
             ch = getch();		/*obtiene el valor de la tecla presionada*/
@@ -142,6 +142,7 @@ mvprintw(LINES-2,COLS*6/8,"Salir = q");
             obtenerPC(&pcou);
 
         }
+		
 		refresh();				/*muestra en pantalla los cambias que se hayan realizado anteriormente*/
 for(i=0; i<num_instructions;i++){
 		free(read.array[i]);

@@ -7,9 +7,11 @@
 
 
 
-WINDOW *newwin(35,35,0,0);
-int main()
+//WINDOW *newwin(35,35,0,0);
+//WINDOW *win;
+int inicia_ram()
 {
+	void Inivideo(void);
     uint32_t registros[15]={10,11,12,13,14,15,250,251,0,0,0,0,1,0,0};/*registro[12] es SP*/
     uint32_t memoria[MEMORIA];
 
