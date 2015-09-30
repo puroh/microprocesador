@@ -5,12 +5,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
-
 typedef struct
 {
 	char** array;
 }ins_t;
-
 
 typedef struct
 {
@@ -21,14 +19,9 @@ typedef struct
 	uint32_t op1_value;
 	uint32_t op2_value;
 	uint32_t op3_value;
+	uint8_t  registers_list[16];
 }instruction_t;
 
-
-/** \fn void decodeInstruction(instruction_t instruction)
-    \brief Decodifica la instrucción y la ejecuta.
-    \param instruction instrucción a decodificar y ejecutar.
-*/
-void decodeInstruction(instruction_t instruction);
 
 /** \fn instruction_t getInstruction(char* instStr)
     \brief Obtiene la instrucción separada por partes.
