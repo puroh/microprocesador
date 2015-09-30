@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <curses.h>
+
 #define MEMORIA 64
 #define DIRMAXMEM 255
 
@@ -9,16 +10,15 @@
 
 //WINDOW *newwin(35,35,0,0);
 //WINDOW *win;
-int inicia_ram()
+void inicia_ram(void)
 {
-	void Inivideo(void);
+	
     uint32_t registros[15]={10,11,12,13,14,15,250,251,0,0,0,0,1,0,0};/*registro[12] es SP*/
     uint32_t memoria[MEMORIA];
 
     registros[12]= DIRMAXMEM+1;
-	IniVideo();
-    inimemoria(memoria,MEMORIA);
-
+	inimemoria(memoria,MEMORIA);
+	
     mvprintw(11,20,"\t\tmemoria inicializada");
 	refresh();
     mostrar_memoria(memoria,MEMORIA);
@@ -31,14 +31,14 @@ int inicia_ram()
 
     mostrar_memoria(memoria,MEMORIA);
 
-    mvprintw(27,20,"Valor de registros %.8X %.8X  %.8X  %.8X",registros[0],registros[1],registros[2],registros[3]);
+    mvprintw(23,20,"Valor de registros %.8X %.8X  %.8X  %.8X",registros[0],registros[1],registros[2],registros[3]);
 
-    mvprintw(29,20,"valor de SP %.8X ",registros[12]);
+    mvprintw(25,20,"valor de SP %.8X ",registros[12]);
 	refresh();
 
 /*fila 11
 columna 20*/
-return 0;
+Disp();
 }
 
 int bitcount(int *R){
@@ -123,7 +123,7 @@ void mostrar_memoria(uint32_t *memoria , int tama){
         {
 		for(j=0;j<tama/8;j++){
 		h+=15;
-		mvprintw(14+i,h,"%.2X : %.8X",k,memoria[l]);
+		mvprintw(14+i,8+h,"%.2X : %.8X",k,memoria[l]);
 		l=l+1;
 		k=k-4;
         refresh();
@@ -132,7 +132,7 @@ void mostrar_memoria(uint32_t *memoria , int tama){
 		//tama = 64
 		h=0;		
 		}
-      	getch();
+      	
 }
 void inimemoria(uint32_t *memoria,int tama){
     int i;

@@ -6,6 +6,8 @@
 #include "alu.h"
 #include "flags.h"
 #include "decoder.h"
+#include "ram.h"
+
 
 
 #define NORMAL       0
@@ -106,7 +108,7 @@ while(pcou<memoria){
                 getch();
                 break;
             }
-            int inicia_ram();
+            
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
             ch = getch();		/*obtiene el valor de la tecla presionada*/
@@ -125,13 +127,12 @@ while(pcou<memoria){
 			attrset(COLOR_PAIR(6 ));
 			mvprintw(LINES-2,COLS/8-2,"    ");
 			refresh();
-
-
-}		/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
+			}/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
+			
 			if(ch=='q'){		/*valida si la tecla presionada es q*/
 			Exit();				/*llama la funcion de salida, la que cierra el programa*/
 			}
-			
+			inicia_ram();
 /*
 mvprintw(LINES-3,COLS/8,"Correr = u");
 mvprintw(LINES-2,COLS/2-4,"Parar = p");

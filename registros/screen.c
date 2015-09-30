@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "screen.h"
 #include <curses.h>
+#include "ram.h"
 
 void showRegisters(uint32_t *registers, size_t len)
 {

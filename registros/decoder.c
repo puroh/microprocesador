@@ -278,7 +278,7 @@ void decodeInstruction(instruction_t instruction)
         LSRS(&registers[instruction.op1_value],&registers[instruction.op2_value],instruction.op3_value); /*ejecuta el desplazamiento LSRS con valor inmediato*/
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]); /*muestra el resultado de la operación*/
 	}
-showRegisters(registers,12);
+showRegisters(registers,15);
 }
 void obtenerPC(uint32_t *pcount)/* Función para obtener el program counter desde el main */
 {
