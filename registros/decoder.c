@@ -3,7 +3,7 @@
 #include "salto.h"
 #include <stdint.h>
 #include "screen.h"
-#include "ram.h"
+
 
 
 
@@ -11,12 +11,16 @@
     uint32_t pc=0,LR;/*se define el program counter y el LR que se modifica con BL*/
 
 
-
 void obtener_registros(uint32_t *registros)
 {
-<<<<<<< HEAD
+      registros=registers;
+
+}
+
+void decodeInstruction(instruction_t instruction)
+{
 	attron(COLOR_PAIR(2));/*Se mofifica el color del printw*/
-    mvprintw(4,40,"Valor de PC %d",registers[14]);/*se imprime en pantalla en la posicion 4,40*/
+    mvprintw(4,40,"Valor de PC %d\n",pc);/*se imprime en pantalla en la posicion 4,40*/
 
     if(strncmp(instruction.mnemonic,"B",1)==0) /*se compara  con strncmp para comparar la primer letra del mnemonico con B para no aumentar pc si se ejecuta un B*/
 	{
@@ -25,30 +29,11 @@ void obtener_registros(uint32_t *registros)
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
             BNE(&pc,instruction.op1_value);/*ejecuta la operacion BNE*/
-=======
-      registros=registers;
-
-}
-
-void decodeInstruction(instruction_t instruction)
-{
-	attron(COLOR_PAIR(2));/*Se mofifica el color del printw*/
-    mvprintw(4,40,"Valor de PC %d",pc);/*se imprime en pantalla en la posicion 4,40*/
-
-    if(strcmp(instruction.mnemonic,"B",1)==0) /*se compara  con strncmp para comparar la primer letra del mnemonico con B para no aumentar pc si se ejecuta un B*/
-	{
-
-        if( strcmp(instruction.mnemonic,"BNE") == 0 )/*compara BNE con el mnemonico. Si es igual ejecuta las instrucciones*/
-		{
-            mvprintw(5,40,"Instruccion :%s %c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
-            BNE(&pc,instruction.op1_value);/*ejecuta la operacion BNE*/
-
         }
         if( strcmp(instruction.mnemonic,"B") == 0 ) /*compara B con el mnemonico en en code.txt en el valor del arreglo definido por PC. Si es igual ejecuta las instrucciones*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
             B(&pc,instruction.op1_value); /*ejecuta la operacion B*/
-
         }
         if( strcmp(instruction.mnemonic,"BEQ") == 0 ) /*compara BEQ con el mnemonico de las instrucciones en el .txt*/
 		{
@@ -58,15 +43,12 @@ void decodeInstruction(instruction_t instruction)
         if( strcmp(instruction.mnemonic,"BCS") == 0 ) /*compara el mnemonico con BCS*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
-
             BCS(&pc,instruction.op1_value);/*ejecuta la funcion BCS de salto.c*/
-
         }
         if( strcmp(instruction.mnemonic,"BCC") == 0 ) /*compara el mnemonico con BCC*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
-            BCC(&pc,instruction.op1_value);/*ejecuta la operacion BCC de salto.c*//*ejecuta la operacion BCC de salto.c*/
-			
+            BCC(&pc,instruction.op1_value);/*ejecuta la operacion BCC de salto.c*/
         }
 
         if( strcmp(instruction.mnemonic,"BMI") == 0 ) /*compara el mnemonico con BMI*/
@@ -97,8 +79,7 @@ void decodeInstruction(instruction_t instruction)
         if( strcmp(instruction.mnemonic,"BLS") == 0 ) /*compara el mnemonico con BLS*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
-            B(&pc,instruction.op1_value);/*ejecuta la funcion BLS de salto.c*/
-
+            BLS(&pc,instruction.op1_value);/*ejecuta la funcion BLS de salto.c*/
         }
         if( strcmp(instruction.mnemonic,"BGE") == 0 ) /*compara el mnemonico con BGE*/
 		{
@@ -128,7 +109,7 @@ void decodeInstruction(instruction_t instruction)
         if( strcmp(instruction.mnemonic,"BL") == 0 ) /*compara el mnemonico con BL*/
 		{
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value);
-            BL(&pc,instruction.op1_value,&registers[13]);/*ejecuta la funcion BL en salto.c*/
+            BL(&pc,instruction.op1_value);/*ejecuta la funcion BL en salto.c*/
         }
         if( strcmp(instruction.mnemonic,"BX") == 0 ) /*compara el mnemonico con BX*/
 		{
@@ -136,37 +117,10 @@ void decodeInstruction(instruction_t instruction)
             BX(&pc);/*ejecuta la funcion BX en salto.c*/
         }
 }
-
-
-
     else /*si no se ejecuta alguna funcion B el pc sigue aumentando*/
 	{
         pc+=2; /*incrementa el valor del pc*/
     }
-
-    if( strcmp(instruction.mnemonic,"PUSH") == 0 ){
-	      printf("instruccion :%s\n",instruction.mnemonic);
-            inimemoria(memoria,MEMORIA);
-            mostrar_memoria(memoria,MEMORIA);
-            if(registers[12]==0){
-            registers[12]=DIRMAXMEM+1;}
-
-            PUSH(registers,memoria,instruction.registers_list);
-            mostrar_memoria(memoria,MEMORIA);
-
-
-	}
-	if( strcmp(instruction.mnemonic,"POP") == 0 ){
-	      printf("instruccion :%s ",instruction.mnemonic);
-            POP(registers,memoria,instruction.registers_list);
-            mostrar_memoria(memoria,MEMORIA);
-
-
-	}
-
-
-
-
 	if( strcmp(instruction.mnemonic,"ADD") == 0 ) /* compara el mnemonico con ADD*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
@@ -301,7 +255,7 @@ void decodeInstruction(instruction_t instruction)
 	if( strcmp(instruction.mnemonic,"RSBS") == 0 ) /*compara el mnemocio con RSBS*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
-        RSBS(&registers[instruction.op1_value],&registers[instruction.op2_value]); /*ejecuta la operación RSBS*/
+        RSBS(&registers[instruction.op1_value],&registers[instruction.op2_value]); /*ejecuta la operación RSBS*/ 
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]); /*muestra el resultado de la operación*/
 	}
 	if( strcmp(instruction.mnemonic,"NOP") == 0 ) /*compara el mnemocio con NOP*/
@@ -327,8 +281,7 @@ void decodeInstruction(instruction_t instruction)
         LSRS(&registers[instruction.op1_value],&registers[instruction.op2_value],instruction.op3_value); /*ejecuta el desplazamiento LSRS con valor inmediato*/
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]); /*muestra el resultado de la operación*/
 	}
-
-/*showRegisters(registers,15);aaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+showRegisters(registers,15);
 }
 void obtenerPC(uint32_t *pcount)/* Función para obtener el program counter desde el main */
 {
@@ -363,17 +316,19 @@ instruction_t getInstruction(char* instStr)
 				instruction.op3_type  = split[0];
 				instruction.op3_value = (uint32_t)strtol(split+1, NULL, 0);
 				break;
-				}
-				split = strtok(NULL, " ,.");
-				num++;
 		}
-		if (num==3){
-				instruction.op3_type = 'N';
-				instruction.op3_value = 0;
-		}
-		free(split);
-		return instruction;
+		split = strtok(NULL, " ,.");
+		num++;
 	}
+	if(num==3)
+	{
+		instruction.op3_type  = 'N';
+		instruction.op3_value = 0;
+	}
+	free(split);
+	return instruction;
+}
+
 int readFile(char* filename, ins_t* instructions)
 {
 	FILE* fp;	/* Puntero a un archivo  */

@@ -9,6 +9,7 @@
 #include "ram.h"
 
 
+
 #define NORMAL       0
 #define BRILLO       1
 #define SEMIBRILLO   2
@@ -149,3 +150,7 @@ for(i=0; i<num_instructions;i++){
 	}
 	free(read.array);
 	return 0;
+
+
+
+}

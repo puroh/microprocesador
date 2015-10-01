@@ -1,5 +1,5 @@
 #include <stdint.h>
-
+#include <stdbool.h>
 /**
 *	\brief Función que suma.
 *	\param Rm Operador con signo de 32 bits.
@@ -96,8 +96,6 @@ void ADDS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void TST(uint32_t *Rm,uint32_t *Rn);
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
-void obtenerBandera(bool *bands);
-void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 
 
 /**

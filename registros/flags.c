@@ -4,11 +4,6 @@
 #include "alu.h"
 #include <curses.h>
 
-
-
-
-
-
 void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar) /* Función que no retorna, pero determina el valor de las banderas en la dirección Rd */
 {
 	if(*Rd>((1<<31))) /* Comparacion lógica con Rd para detrminar si hay bandera negativa */
@@ -29,7 +24,7 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
 	}
     if(*compar==0) /* Compara la variable igual a cero, para saber si se ha modificado todas las banderas */
 	{
-		if(((*Rm>=(1<<31))^(*Rn<0))&&((*Rn>=(1<<31))^(*Rm<0))) /* Condición lógica matemática que determina si hay bandera Carry */
+		if((((((*Rm<<31))==(1<<31))&&((((*Rn&(1<<31))==(1<<31)))))&&(((*Rd&(1<<31))==0)))||((((*Rn<<31))==(1<<31)&&((*Rm&(1<<31))==(1<<31)))&&(((*Rd&(1<<31))==0)))||(((*Rn&(1<<31))==(1<<31))&&((*Rm&(1<<31))==(1<<31))&&(((*Rd&(1<<31))==(1<<31))))) /* Condición lógica matemática que determina si hay bandera Carry */
 		{
 			banderas[C]=1; /* Si cumple con la condición */
 		}
@@ -50,6 +45,12 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
 		}
     }
 
+	if( *compar==3 ){
+	if((*Rm & 1<<31)>=(1<<31)){	
+	banderas[C]=1;
+	}
+	}
+
 /***********************/
 /* Muestra las banderas*/
 
@@ -58,8 +59,6 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
 	refresh(); /* Código sirve para ser uso de printw */
 /***********************/
 }
-
-
 
 
 

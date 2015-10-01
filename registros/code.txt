@@ -38,5 +38,3 @@ MOV R1,R4
 
 BX LR
 
-
-

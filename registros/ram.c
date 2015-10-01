@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-#include <stdint.h>
-#include "ram.h"
-uint8_t bitcount(uint8_t *R){
-
-	uint8_t i,contador=0;
-	for(i=0;i<16;i++){
-	if((1 & R[i])!=0)
-=======
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -62,20 +53,10 @@ int bitcount(int *R){
 	int i,contador=0;
 	for(i=0;i<9;i++){
 	if(((1<<i)& *R)!=0)
->>>>>>> master
        contador++;
                     }
     return contador;
 }
-<<<<<<< HEAD
-void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res){
-    uint8_t address;
-    uint8_t i=0;
-    (registros[12])--;
-    address=registros[12]-(4*bitcount(res));
-    for(i=0;i<15;i++){
-		if( (1  & res[i])!= 0 ){
-=======
 void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res){/*memory memoria SRAM y res es un arreglo de caracteres que contiene*/
                                                                 /*los caracteres que se quieren guardar en memoria*/
     int R=0,address;
@@ -97,7 +78,6 @@ void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res){/*memory memoria SR
     address=registros[12]-(4*bitcount(&R));
     for(i=0;i<15;i++){
 		if ( ( (1<<i) & R)!= 0 ){
->>>>>>> master
 
             memory[MEMORIA-((address/4)+2)]=registros[i];
 
@@ -105,18 +85,6 @@ void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res){/*memory memoria SR
 			address=address+4;
 			}
 		}
-<<<<<<< HEAD
-	registros[12]-=(4*bitcount(res));
-	}
-
-void POP(uint32_t *registros,uint32_t *memory,uint8_t *res){
-    uint8_t R=0,address;
-    uint8_t i=0;
-
-    address=registros[12];
-    for(i=0;i<7;i++){
-		if( (1 & res[i])!= 0 ){
-=======
 	registros[12]-=(4*bitcount(&R));
 	}
 void POP(uint32_t *registros,uint32_t *memory,uint8_t *res){
@@ -138,7 +106,6 @@ void POP(uint32_t *registros,uint32_t *memory,uint8_t *res){
     address=registros[12];
     for(i=0;i<7;i++){
 		if ( ( (1<<i) & R)!= 0 ){
->>>>>>> master
 
            registros[i]=memory[MEMORIA-((address/4)+2)];
 
@@ -146,21 +113,14 @@ void POP(uint32_t *registros,uint32_t *memory,uint8_t *res){
 			address=address+4;
 			}
 		}
-<<<<<<< HEAD
-	registros[12]+=(4*bitcount(res));
-=======
 	registros[12]+=(4*bitcount(&R));
->>>>>>> master
 }
 
 
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 void mostrar_memoria(uint32_t *memoria , int tama){
     int i,j,h,k,l;
         h=0;
@@ -174,21 +134,12 @@ void mostrar_memoria(uint32_t *memoria , int tama){
 		l=l+1;
 		k=k-4;
         refresh();
-<<<<<<< HEAD
-
-        }
-		//tama = 64
-		h=0;
-		}
-
-=======
 		
         }
 		//tama = 64
 		h=0;		
 		}
       	
->>>>>>> master
 }
 void inimemoria(uint32_t *memoria,int tama){
     int i;
@@ -197,19 +148,3 @@ void inimemoria(uint32_t *memoria,int tama){
         memoria[i]= -1;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
