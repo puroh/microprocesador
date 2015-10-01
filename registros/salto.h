@@ -120,10 +120,14 @@ void BAL(uint32_t *pc,uint32_t valor);
 *	\param pc Contador del programa.
 *	\param valor Es un valor inmediato sin signo de 32 bits.
 */
+
 void BL(uint32_t *pc,uint32_t valor);
+
 /**
 *	\brief Función Función que realiza un salto a una dirección especifica por un registro.
 *	\param pc Contador del programa.
 */
+
 void BX(uint32_t *pc);
+
 
