@@ -4,61 +4,46 @@
 #include "alu.h"
 #include <curses.h>
 
-void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar) /* Función que no retorna, pero determina el valor de las banderas en la dirección Rd */
-{
-	if(*Rd>((1<<31))) /* Comparacion lógica con Rd para detrminar si hay bandera negativa */
-	{
-		banderas[N]=1;
-	}
-	else /* Se ejecuta esta instruccioón en caso de no ser verdadera la condición lógica matemática*/
-	{
-		banderas[N]=0; /* Vale cero en casoi de no cumplir con la primera condición */
-	}
-	if(!*Rd) /* Se establece que si es diferente se determina la bandera de ceros */
-	{
-		banderas[Z]=1; /* Para cuando cumple con la condición*/
-	}
-	else /* Se ejecuta esta instruccioón en caso de no ser verdadera la condición lógica matemática*/
-	{
-    banderas[Z]=0; /* En caso de no cumplir con la condición */
-	}
-    if(*compar==0) /* Compara la variable igual a cero, para saber si se ha modificado todas las banderas */
-	{
-		if((((((*Rm<<31))==(1<<31))&&((((*Rn&(1<<31))==(1<<31)))))&&(((*Rd&(1<<31))==0)))||((((*Rn<<31))==(1<<31)&&((*Rm&(1<<31))==(1<<31)))&&(((*Rd&(1<<31))==0)))||(((*Rn&(1<<31))==(1<<31))&&((*Rm&(1<<31))==(1<<31))&&(((*Rd&(1<<31))==(1<<31))))) /* Condición lógica matemática que determina si hay bandera Carry */
-		{
-			banderas[C]=1; /* Si cumple con la condición */
-		}
-        else /* Se ejecuta esta instruccioón en caso de no ser verdadera la condición lógica matemática*/
-		{
-            banderas[C]=0; /* En el caso de no cumplir con la condición */
-		}
-    }
-    if(*compar==0) /* Compara la variable igual a cero, para saber si se ha modificado todas las banderas */
-	{
-		if((((*Rm&(1<<31))==(1<<31)&&(*Rn&(1<<31))==(1<<31))&&(((*Rd&(1<<31))==0)))||(((*Rm&(1<<31))==(0)&&(*Rn&(1<<31))==(0))&&(((*Rd&(1<<31))==(1<<31))))) /* Condición lógica matemática que determina si hay bandera Sobreflujo */
-		{
-			banderas[V]=1; /* Si cumple con la condición */
-		}
-        else /* Se ejecuta esta instruccioón en caso de no ser verdadera la condición lógica matemática*/
-		{
-            banderas[V]=0; /* En el caso de no cumplir con la condición */
-		}
-    }
+uint32_t H=2147483648UL;
 
-	if( *compar==3 ){
-	if((*Rm & 1<<31)>=(1<<31)){	
-	banderas[C]=1;
-	}
-	}
+void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar){/* Función que no retorna, pero determina el valor de las banderas en la dirección Rd */
+    if(*Rd>=((1<<31)))
+        banderas[N]=1;
+    else
+        banderas[N]=0;
+
+    if(!*Rd)
+        banderas[Z]=1;
+    else
+        banderas[Z]=0;
+    if(*compar==0){
+            printf("************entro**********");
+         if(( (*Rm>=H)&&(*Rn<H)&&(*Rd<H)) || ((*Rn>=H)&&(*Rm<H)&&(*Rd<H)) || ((*Rm>=H)&&(*Rn>=H)) )
+            banderas[C]=1;
+        else
+            banderas[C]=0;
+    }
+    if(*compar==0){
+        if((*Rm&(H))==(*Rn&H)) /*si los bits mas significativo de Rm y Rn son iguales*/
+        {
+            if((*Rm&H)!=(*Rd&H))	/*y si los bits mas significativos de Rd y Rn son diferentes*/
+            {
+                banderas[V]=1;
+            }
+        }
+        else
+            banderas[V]=0;
+    }
+}
+
 
 /***********************/
 /* Muestra las banderas*/
 
 	attrset(COLOR_PAIR(2 )); /* Permite cambiar el color a los textos */
-	mvprintw(7,40,"N:%d Z:%d C:%d V:%d\n",banderas[N],banderas[Z],banderas[C],banderas[V]); /* Imprime el valor de las banderas en una interfaz, mediante el uso de la libreria curses */
+	mvprintw(7,40,"N:%d Z:%d C:%d V:%d",banderas[N],banderas[Z],banderas[C],banderas[V]); /* Imprime el valor de las banderas en una interfaz, mediante el uso de la libreria curses */
 	refresh(); /* Código sirve para ser uso de printw */
 /***********************/
 }
-
 
 

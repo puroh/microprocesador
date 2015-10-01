@@ -85,7 +85,7 @@ int Disp(void){
 		instruction_t instruction;
 		uint32_t pcou=0;			/*contador de direccion de operacion*/
 		uint32_t memoria=500;		/*cantidad maxima de instrucciones*/
-		num_instructions = readFile("code.txt", &read);
+		num_instructions = readFile("prueba1.txt", &read);
 		if(num_instructions==-1)
 			return 0;
 

@@ -14,8 +14,9 @@ void SUB(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, per
 {   
 	//attrset(COLOR_PAIR(2 ));  
 	*Rd=*Rm+((~*Rn)+1); /* Resta entre las dirección de Rm y Rn realizando complemento a 2 */
+	rn=((~*Rn)+1);
 	comp=0; /* Modifica todas las banderas */
-    flag(Rd,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+    flag(Rd,Rm,&rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void AND(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero internamente realiza la operación de multiplicación*/
 {
@@ -63,7 +64,8 @@ void MOVS(uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero escribe un 
 void SUBS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero internamente realiza una resta entre el valor de la dirección Rm y un valor inmediato*/
 {
     *Rd=*Rm+((~Rn)+1); /* Resta complemento a 2 con un valor inmediato */
-    comp=0; /* Modifica todas las banderas */
+	Rn=((~Rn)+1);    
+	comp=0; /* Modifica todas las banderas */
     flag(Rd,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void ADDS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero internamente realiza una suma entre el valor de la dirección Rm y un valor inmediato*/
@@ -84,22 +86,24 @@ void LSR(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza un 
 	comp=1; /* Modifica solo una bandera */
 	flag(Rm,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
-void ROR(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza una rotación de los datos */
+void RORS(uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza una rotación de los datos */
 {
-	*Rn=*Rm; 
-	*Rm=*Rm>>16; /* Desplaza a la derecha 16 bit  el valor en la dirección Rm */
-	*Rn=*Rn<<16; /* Desplaza a la izquierda 16 bits el valor en la dirección Rm */
-	*Rm=(*Rm|*Rn); /* Realiza una OR entre las direcciones desplazadas Rm y Rn*/
-	comp=1; /* Modifica solo una bandera */
-	flag(Rm,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+	uint32_t a1,a2;
+    a1=*Rm>>Rn;
+    a2=*Rm<<(32-Rn);
+    *Rm=a1|a2;
+    comp=1;
+    flag(Rm,Rm,&Rn,banderas,&comp);
+    banderas[C]=(*Rm>>(Rn-1))&1; /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
-void ASRS(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza un desplazamiento aritmético a la derecha */
+void ASRS(uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento aritmético a la derecha */
 {
 	*Rm=(*Rm>>*Rn); /* Desplazamiento de Rm según el valor de Rn y se guarda en la dirección de Rm */
 	*Rn=~0<<(32-*Rn); /* Resta 32 bits al valor en Rn y hace un corrimiento de 0 negado guardando el resultado en la dirección de Rn*/ 
 	*Rm|=*Rn; /* Realiza la operción OR entre las direcciones Rm y Rn, y el resultado se guarda en la dirección Rm */
 	comp=1; /* Modifica solo una bandera */
 	flag(Rm,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+	banderas[C]=(*Rm>>(Rn-1))&1;
 }
 void MOV(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero desplaza el valor en Rm las veces del valor Rn */
 {
@@ -109,10 +113,11 @@ void MOV(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero desplaza el
 }
 void CMP(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna pero, internamente realiza una resta que solo modifica las banderas sin guardar el resultado*/
 {
-    uint32_t R; /* Se declara una variable auxiliar para determinar los valores de las banderas */
+    uint32_t R,rn; /* Se declara una variable auxiliar para determinar los valores de las banderas */
     R=*Rm+((~*Rn)+1); /* Resta complemento a 2 */
+	rn=((~*Rn)+1);
 	comp=0; /* Modifica todas las banderas */
-	flag(&R,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+	flag(&R,Rm,&rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void REV(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero cambia el orden de los Bytes */
 {
@@ -125,11 +130,11 @@ void REV16(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero cambia el
     *Rn=((*Rm<<24)>>16)|((*Rm<<16)>>24); /* Realiza una OR entre los desplazamientos de bits deseados */
     *Rm=*Rn|(((*Rm>>24)<<16)|((*Rm>>16)<<24)); /* Realiza una OR entre los desplazamientos de bits deseados */
 }
-void BIC(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza internamente una AND entre un registro y el complemento del otro*/
+void BICS(uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza internamente una AND entre un registro y el complemento del otro*/
 {
-	*Rm &= ~*Rn; /* Operación AND entre el registro Rm y el complemento del registro Rn */
+	*Rm &= ~Rn; /* Operación AND entre el registro Rm y el complemento del registro Rn */
 	comp=1; /* Modifica solo una bandera */
-    flag(Rm,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+    flag(Rm,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 void MVN(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero guarda el complemento de un registro */
 {
@@ -153,16 +158,24 @@ void TST(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza la 
 }
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la izquierda de un valor inmediato */
 {
-	*Rd=*Rm<<Rn; /* Desplaza el valor en la dirección Rm las veces del valor inmediato Rn */
-	comp=3; /* Modifica solo una bandera */
-	flag(Rd,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
-}
+    uint32_t a1,aux;
+    aux=*Rm;
+    (*Rd)=(*Rm)<<(Rn);
+    printw("alu_linea164.resultado en la alu %u",*Rd);
+    comp=1;
+    flag(Rd,Rm,&Rn,banderas,&comp);
+    a1=((aux<<(Rn-1))&(1<<31))>>31;
+    banderas[C]=a1;
+{
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la derecha de un valor inmediato */
 {
 
-	*Rd=*Rm>>Rn; /* Desplaza el valor en la dirección Rm las veces del valor inmediato Rn */
-	comp=1; /* Modifica solo una bandera */
-	flag(Rd,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+    uint32_t aux;
+    aux=*Rm;
+    *Rd=*Rm>>Rn;
+    comp=1;
+    flag(Rm,Rm,&Rn,banderas,&comp);
+    banderas[C]=(aux>>(Rn-1))&1;
 }
 void obtenerBandera(bool *bands) /* Función que se crea para modificar las banderas en otros archivos dentro del proyecto */
 {
@@ -171,6 +184,6 @@ void obtenerBandera(bool *bands) /* Función que se crea para modificar las band
 void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
 {
     *Rd=(*Rm)*(*Rn);
-    comp=0;
+    comp=2;
      flag(Rd,Rm,Rn,banderas,&comp);
 }
