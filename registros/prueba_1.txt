@@ -1,0 +1,36 @@
+MOVS R0,#36
+
+MOVS R1,#6
+
+BL #2
+
+B #0
+
+MOVS R1,#1
+
+LSLS R1,R1,#15
+
+MOVS R2,#0
+
+ADDS R2,R2,R1
+
+MOVS R3,R2
+
+MULS R3,R3,R3
+
+CMP R3,R0
+
+BLS #2
+
+SUBS R2,R2,R1
+
+LSRS R1,R1,#1
+
+BNE	#-9
+
+MOV	R0,R2
+
+BX LR
+
+NOP
+

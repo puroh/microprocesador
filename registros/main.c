@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <curses.h>
@@ -7,7 +7,6 @@
 #include "flags.h"
 #include "decoder.h"
 #include "ram.h"
-
 
 
 #define NORMAL       0
@@ -59,7 +58,7 @@ void IniVideo(void){/*Para los colores */
 
 
 void Exit(void){
-
+        
         clear();
         endwin();/*finaliza la muestra de curses*/
         exit(1);/*cierra el programa*/
@@ -72,20 +71,20 @@ int main(void)
 	IniVideo();  /*funcion para configurar colores y el modo de visualizado*/
 	Disp();     /*Funcion en donde se realizan las operaciones*/
     Exit();  	/*Funcion para finalizar el programa*/
-    return 0;
+    return 0;  
 }
 
 int Disp(void){
-
-
+	
+	
 		char ch='0';				/*declaracion de variable tipo char para realizar acciones con el teclado	*/
 		int i, num_instructions; 	/*declaracion de variables*/
-		ins_t read;
+		ins_t read;					
 		char** instructions;
 		instruction_t instruction;
 		uint32_t pcou=0;			/*contador de direccion de operacion*/
 		uint32_t memoria=500;		/*cantidad maxima de instrucciones*/
-		num_instructions = readFile("prueba1.txt", &read);
+		num_instructions = readFile("code.txt", &read);
 		if(num_instructions==-1)
 			return 0;
 
@@ -108,7 +107,7 @@ while(pcou<memoria){
                 getch();
                 break;
             }
-
+            
             instruction = getInstruction(instructions[pcou]);
             decodeInstruction(instruction);
             ch = getch();		/*obtiene el valor de la tecla presionada*/
@@ -117,8 +116,8 @@ while(pcou<memoria){
 			mvprintw(LINES-2,COLS/8-2,"  ");
 			attrset(COLOR_PAIR(6 ));
 			mvprintw(LINES-2,COLS/2-6,"  ");
-			refresh();
-			timeout(1000);
+			refresh();			
+			timeout(1000);					
 			}		/*instruccion que permite seguir ejecutando el codigo aun si no se esta presionando*/
             if(ch=='p'){		/*valida si la tecla presionada es p*/
             timeout(-1);
@@ -128,7 +127,7 @@ while(pcou<memoria){
 			mvprintw(LINES-2,COLS/8-2,"    ");
 			refresh();
 			}/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
-
+			
 			if(ch=='q'){		/*valida si la tecla presionada es q*/
 			Exit();				/*llama la funcion de salida, la que cierra el programa*/
 			}
@@ -143,14 +142,10 @@ mvprintw(LINES-2,COLS*6/8,"Salir = q");
             obtenerPC(&pcou);
 
         }
-
+		
 		refresh();				/*muestra en pantalla los cambias que se hayan realizado anteriormente*/
 for(i=0; i<num_instructions;i++){
 		free(read.array[i]);
 	}
 	free(read.array);
 	return 0;
-
-
-
-}
