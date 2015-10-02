@@ -17,12 +17,13 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
     else
         banderas[Z]=0;
     if(*compar==0){
-            printf("************entro**********");
+            //printf("************entro**********");
          if(( (*Rm>=H)&&(*Rn<H)&&(*Rd<H)) || ((*Rn>=H)&&(*Rm<H)&&(*Rd<H)) || ((*Rm>=H)&&(*Rn>=H)) )
             banderas[C]=1;
-        else
+         else
             banderas[C]=0;
     }
+
     if(*compar==0){
         if((*Rm&(H))==(*Rn&H)) /*si los bits mas significativo de Rm y Rn son iguales*/
         {
@@ -33,9 +34,7 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
         }
         else
             banderas[V]=0;
-    }
-}
-
+    	}
 
 /***********************/
 /* Muestra las banderas*/
@@ -45,5 +44,9 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
 	refresh(); /* Código sirve para ser uso de printw */
 /***********************/
 }
+
+
+
+
 
 

@@ -82,7 +82,7 @@ void BICS(uint32_t *Rm,uint32_t Rn);
 
 void MVN(uint32_t *Rm,uint32_t *Rn);
 
-void RSBS(uint32_t *Rm,uint32_t Rn);
+void RSBS(uint32_t *Rm,uint32_t *Rn);
 
 void NOP(void);
 void MOV(uint32_t *Rm,uint32_t *Rn);
@@ -92,7 +92,7 @@ void CMN(uint32_t *Rm,uint32_t *Rn);
 void SBC(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
 void MOVS(uint32_t *Rm,uint32_t Rn);
 void SUBS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
-void ADDS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);
+void ADDS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void TST(uint32_t *Rm,uint32_t *Rn);
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);

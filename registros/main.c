@@ -69,6 +69,9 @@ void Exit(void){
 
 int main(void)
 {
+	
+	
+	
 	IniVideo();  /*funcion para configurar colores y el modo de visualizado*/
 	Disp();     /*Funcion en donde se realizan las operaciones*/
     Exit();  	/*Funcion para finalizar el programa*/
@@ -85,10 +88,10 @@ int Disp(void){
 		instruction_t instruction;
 		uint32_t pcou=0;			/*contador de direccion de operacion*/
 		uint32_t memoria=500;		/*cantidad maxima de instrucciones*/
-		num_instructions = readFile("prueba1.txt", &read);
+		num_instructions = readFile("prueba_1.txt", &read);
 		if(num_instructions==-1)
 			return 0;
-
+		
 		if(read.array==NULL)
 			return 0;
 
@@ -132,7 +135,7 @@ while(pcou<memoria){
 			if(ch=='q'){		/*valida si la tecla presionada es q*/
 			Exit();				/*llama la funcion de salida, la que cierra el programa*/
 			}
-			inicia_ram();
+			//inicia_ram();
 /*
 mvprintw(LINES-3,COLS/8,"Correr = u");
 mvprintw(LINES-2,COLS/2-4,"Parar = p");

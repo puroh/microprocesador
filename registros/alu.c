@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "flags.h"
+#include <curses.h>
 
 bool banderas[4]; /* Declara banderas booleanas*/
 uint8_t comp=0; /* Variable que se crea para no modificar algunas banderas */
@@ -12,6 +13,7 @@ void ADD(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, per
 } 
 void SUB(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero internamente realiza la operación resta */
 {   
+	uint32_t rn;
 	//attrset(COLOR_PAIR(2 ));  
 	*Rd=*Rm+((~*Rn)+1); /* Resta entre las dirección de Rm y Rn realizando complemento a 2 */
 	rn=((~*Rn)+1);
@@ -98,11 +100,11 @@ void RORS(uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza una
 }
 void ASRS(uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento aritmético a la derecha */
 {
-	*Rm=(*Rm>>*Rn); /* Desplazamiento de Rm según el valor de Rn y se guarda en la dirección de Rm */
-	*Rn=~0<<(32-*Rn); /* Resta 32 bits al valor en Rn y hace un corrimiento de 0 negado guardando el resultado en la dirección de Rn*/ 
-	*Rm|=*Rn; /* Realiza la operción OR entre las direcciones Rm y Rn, y el resultado se guarda en la dirección Rm */
+	*Rm=(*Rm>>Rn); /* Desplazamiento de Rm según el valor de Rn y se guarda en la dirección de Rm */
+	Rn=~0<<(32-Rn); /* Resta 32 bits al valor en Rn y hace un corrimiento de 0 negado guardando el resultado en la dirección de Rn*/ 
+	*Rm|=Rn; /* Realiza la operción OR entre las direcciones Rm y Rn, y el resultado se guarda en la dirección Rm */
 	comp=1; /* Modifica solo una bandera */
-	flag(Rm,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
+	flag(Rm,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 	banderas[C]=(*Rm>>(Rn-1))&1;
 }
 void MOV(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero desplaza el valor en Rm las veces del valor Rn */
@@ -166,7 +168,7 @@ void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, per
     flag(Rd,Rm,&Rn,banderas,&comp);
     a1=((aux<<(Rn-1))&(1<<31))>>31;
     banderas[C]=a1;
-{
+}
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la derecha de un valor inmediato */
 {
 
@@ -187,3 +189,4 @@ void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
     comp=2;
      flag(Rd,Rm,Rn,banderas,&comp);
 }
+

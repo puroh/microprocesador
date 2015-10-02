@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "ram.h"
+#include <curses.h>
 uint8_t bitcount(uint8_t *R){
 
 	uint8_t i,contador=0;
@@ -27,7 +28,7 @@ void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res){
 	}
 
 void POP(uint32_t *registros,uint32_t *memory,uint8_t *res){
-    uint8_t R=0,address;
+    uint8_t address;
     uint8_t i=0;
 
     address=registros[12];
@@ -78,7 +79,8 @@ void inimemoria(uint32_t *memoria,int tama){
 void inicia_ram(void)
 {
 	
-    uint32_t registros[15]={10,11,12,13,14,15,250,251,0,0,0,0,1,0,0};/*registro[12] es SP
+    uint32_t registros[15]={10,11,12,13,14,15,250,251,0,0,0,0,1,0,0};
+	registro[12] es SP
     uint32_t memoria[MEMORIA];
 
     registros[12]= DIRMAXMEM+1;
@@ -101,7 +103,7 @@ void inicia_ram(void)
     mvprintw(25,20,"valor de SP %.8X ",registros[12]);
 	refresh();
 
-/*fila 11
+fila 11
 columna 20
 Disp();
 }*/

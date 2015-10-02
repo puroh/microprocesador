@@ -45,5 +45,6 @@ int readFile(char* filename, ins_t* instructions);
 */
 int countLines(FILE* fp);
 void obtenerPC(uint32_t *pcount);
+void decodeInstruction(instruction_t instruction);
 
 #endif /*_DECODER_H_*/

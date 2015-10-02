@@ -17,4 +17,3 @@ obj:
 clean:
 	rm -f main
 	rm -f test
-

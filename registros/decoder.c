@@ -3,12 +3,13 @@
 #include "salto.h"
 #include <stdint.h>
 #include "screen.h"
+#include "ram.h"
 
 
 
 
     uint32_t registers[15];
-    uint32_t pc=0,LR;/*se define el program counter y el LR que se modifica con BL*/
+    uint32_t memoria[MEMORIA];/*se define el program counter y el LR que se modifica con BL*/
 
 void decodeInstruction(instruction_t instruction)
 {
@@ -241,7 +242,7 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) /* compara el mnemonico con ADD*/
 	if( strcmp(instruction.mnemonic,"ASRS") == 0 ) /*compara el mnemocio con ASRS*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
-        ASRS(&registers[instruction.op1_value],&registers[instruction.op2_value]); /*ejecuta la operación ASRS*/
+        ASRS(&registers[instruction.op1_value],instruction.op2_value); /*ejecuta la operación ASRS*/
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]); /*muestra el resultado de la operación*/
 	}
 	if( strcmp(instruction.mnemonic,"REV") == 0 ) /*compara el mnemocio con REV*/
@@ -259,7 +260,7 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) /* compara el mnemonico con ADD*/
 	if( strcmp(instruction.mnemonic,"BICS") == 0 ) /*compara el mnemocio con BIC*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
-        BICS(&registers[instruction.op1_value],&registers[instruction.op2_value]); /*ejecuta la operación BIC*/
+        BICS(&registers[instruction.op1_value],instruction.op2_value); /*ejecuta la operación BIC*/
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]); /*muestra el resultado de la operación*/
 	}
 	if( strcmp(instruction.mnemonic,"MVN") == 0 ) /*compara el mnemocio con MVN*/
@@ -306,7 +307,6 @@ void obtenerPC(uint32_t *pcount)/* Función para obtener el program counter desd
 
 instruction_t getInstruction(char* instStr)
 {
-	uint8_t contador, inicio = 1<<7;
 
 	instruction_t instruction=
 	{
