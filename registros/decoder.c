@@ -107,7 +107,7 @@ void decodeInstruction(instruction_t instruction)
         }
         if( strcmp(instruction.mnemonic,"BX") == 0 ) /*compara el mnemonico con BX*/
 		{
-            mvprintw(5,40,"Instruccion :%s %c\n",instruction.mnemonic,instruction.op1_type);
+            mvprintw(5,40,"Instruccion :%s %c",instruction.mnemonic,instruction.op1_type);
             BX(&registers[14]);/*ejecuta la funcion BX en salto.c*/
         }
 }
@@ -117,7 +117,7 @@ void decodeInstruction(instruction_t instruction)
     }
 
     if( strcmp(instruction.mnemonic,"PUSH") == 0 ){
-	      printf("instruccion :%s\n",instruction.mnemonic);
+	      mvprintw(9,40,"instruccion :%s ",instruction.mnemonic);
             inimemoria(memoria,MEMORIA);
             mostrar_memoria(memoria,MEMORIA);
             if(registers[12]==0){
@@ -129,7 +129,7 @@ void decodeInstruction(instruction_t instruction)
 
 	}
 	if( strcmp(instruction.mnemonic,"POP") == 0 ){
-	      printf("instruccion :%s ",instruction.mnemonic);
+	      mvprint(10,40,"instruccion :%s ",instruction.mnemonic);
             POP(registers,memoria,instruction.registers_list);
             mostrar_memoria(memoria,MEMORIA);
 
@@ -140,9 +140,9 @@ void decodeInstruction(instruction_t instruction)
 
 if( strcmp(instruction.mnemonic,"ADD") == 0 ) /* compara el mnemonico con ADD*/
 	{
-	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
         ADD(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);/*ejecuta la funcion ADD localizada en alu.c*/
-        mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
+        mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
 	}
 
 	if( strcmp(instruction.mnemonic,"MULS") == 0 ){
@@ -154,29 +154,29 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) /* compara el mnemonico con ADD*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
         SUB(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);/*ejecuta la funcion SUB localizada en alu.c*/
-        mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
+        mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
 	}
 	if( strcmp(instruction.mnemonic,"AND") == 0 ) /*compara el mnemonico con AND*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
         AND(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);/*ejecuta la funcion AND*/
-        mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
+        mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
 	}
 	if( strcmp(instruction.mnemonic,"ORR") == 0 ) /*compara el mnemonico con ORR*/
 	{
 	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
         ORR(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);/*ejecuta la funcion ORR*/
-        mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
+        mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
 	}
 	if( strcmp(instruction.mnemonic,"EOR") == 0 ) /*compara el mnemonico con EOR*/
 	{
-	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
         EOR(&registers[instruction.op1_value],&registers[instruction.op2_value],&registers[instruction.op3_value]);/*ejecuta la funcion EOR*/
-        mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
+        mvprintw(8,40,"valor del registro %d",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
 	}
 	if( strcmp(instruction.mnemonic,"MOV") == 0 ) /*compara el mnemonico con MOV*/
 	{
-	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
+	    mvprintw(5,40,"Instruccion :%s %c%d,%c%d",instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
         MOV(&registers[instruction.op1_value],&registers[instruction.op2_value]);/*ejecuta la operacion MOV*/
         mvprintw(8,40,"valor del registro %d\n",registers[instruction.op1_value]);/*muestra el resultado de la operacion*/
 	}

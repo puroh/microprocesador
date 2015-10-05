@@ -1,7 +1,7 @@
 //carga y almacenamineto
 
 
-void LDR(uint_32 Rt,uint_32 Rn,int imm)//Rn =direciones de los registros
+void LDR(uint32_t Rt,uint32_t Rn,int imm)//Rn =direciones de los registros
 	{
 		int offset_addr;
 		imm=(imm<<2)|31;
@@ -9,4 +9,4 @@ void LDR(uint_32 Rt,uint_32 Rn,int imm)//Rn =direciones de los registros
 		Rt=memU[offset_addr,4];
 	}
 
-void LDRB (uint_32 Rt,uint_32 )
+void LDRB (uint32_t Rt,uint32_t )

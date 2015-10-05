@@ -1,17 +1,17 @@
-void LDR(uint_32 Rt,uint_32 Rn,uint_32 imm);
+void LDR(uint32_t Rt,uint32_t Rn,uint32_t imm);
 
-void LDRB (uint_32 Rt,uint_32 Rn,uint_32 imm);
+void LDRB (uint32_t Rt,uint32_t Rn,uint32_t imm);
 
-void LDRH (uint_32 Rt,uint_32 Rn,uint_32 imm);
+void LDRH (uint32_t Rt,uint32_t Rn,uint32_t imm);
 
-void LDRSB (uint_32 Rt,uint_32 Rn,uint_32 Rm);
+void LDRSB (uint32_t Rt,uint32_t Rn,uint32_t Rm);
 
-void LDRSH (uint_32 Rt,uint_32 Rn,uint_32 Rm);
+void LDRSH (uint32_t Rt,uint32_t Rn,uint32_t Rm);
 
-void STR (uint_32 Rt,uint_32 Rn,uint_32 imm, uint_32 Rm,uint_32 Sp);
+void STR (uint32_t Rt,uint32_t Rn,uint32_t imm, uint32_t Rm,uint32_t Sp);
 
-void STRB (uint_32 Rt,uint_32 Rn,uint_32 imm,uint_32 Rm);
+void STRB (uint32_t Rt,uint32_t Rn,uint32_t imm,uint32_t Rm);
 
-void STRH (uint_32 Rt,uint_32 Rn,uint_32 imm,uint_32 Rm);
+void STRH (uint32_t Rt,uint32_t Rn,uint32_t imm,uint32_t Rm);
 
 

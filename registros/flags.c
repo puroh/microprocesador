@@ -17,7 +17,7 @@ void flag(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn,bool *banderas,uint8_t *compar)
     else
         banderas[Z]=0;
     if(*compar==0){
-            //printf("************entro**********");
+            
          if(( (*Rm>=H)&&(*Rn<H)&&(*Rd<H)) || ((*Rn>=H)&&(*Rm<H)&&(*Rd<H)) || ((*Rm>=H)&&(*Rn>=H)) )
             banderas[C]=1;
          else
