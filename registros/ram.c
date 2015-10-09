@@ -56,8 +56,8 @@ void mostrar_memoria(uint32_t *memoria , int tama){
 	    for(i=0;i<tama/8;i++)
         {
 		for(j=0;j<tama/8;j++){
-		h+=15;
-		mvprintw(14+i,8+h,"%.2X : %.8X",k,memoria[l]);
+		h+=1;
+		mvprintw(14+i,5+h,"%.2X : %.2X %.2X %.2X %.2X",k,(uint8_t)(memoria[l]>>24),(uint8_t)(memoria[l]>>16),(uint8_t)(memoria[l]>>8),(uint8_t)(memoria[l]));
 		l=l+1;
 		k=k-4;
         refresh();
@@ -70,7 +70,7 @@ void mostrar_memoria(uint32_t *memoria , int tama){
 }
 void inimemoria(uint32_t *memoria,int tama){
     int i;
-    for(i=0;i<(tama*4);i++)
+    for(i=0;i<(tama);i++)
     {
         memoria[i]= -1;
     }

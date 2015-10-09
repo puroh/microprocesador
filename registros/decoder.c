@@ -118,20 +118,22 @@ void decodeInstruction(instruction_t instruction)
 
     if( strcmp(instruction.mnemonic,"PUSH") == 0 ){
 	      mvprintw(9,40,"instruccion :%s ",instruction.mnemonic);
+
             inimemoria(memoria,MEMORIA);
-            mostrar_memoria(memoria,MEMORIA);
+			
+           //mostrar_memoria(memoria,MEMORIA);
             if(registers[12]==0){
             registers[12]=DIRMAXMEM+1;}
 
             PUSH(registers,memoria,instruction.registers_list);
-            mostrar_memoria(memoria,MEMORIA);
+           // mostrar_memoria(memoria,MEMORIA);
 
 
 	}
 	if( strcmp(instruction.mnemonic,"POP") == 0 ){
-	      mvprint(10,40,"instruccion :%s ",instruction.mnemonic);
+	      mvprintw(10,40,"instruccion :%s ",instruction.mnemonic);
             POP(registers,memoria,instruction.registers_list);
-            mostrar_memoria(memoria,MEMORIA);
+            //mostrar_memoria(memoria,MEMORIA);
 
 
 	}
@@ -302,9 +304,18 @@ showRegisters(registers,15);
 }
 void obtenerPC(uint32_t *pcount)/* Función para obtener el program counter desde el main */
 {
-    *pcount=registers[14];
+*pcount=registers[14];
 }
+void obtener_registros(uint32_t *pcount)
+	{
 
+    pcount=registers;
+		}
+void obtener_memoria(uint32_t *pcount)
+	{
+
+    pcount=memoria;
+		}
 instruction_t getInstruction(char* instStr)
 {
 

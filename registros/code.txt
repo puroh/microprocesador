@@ -1,6 +1,6 @@
-MOVS R0,#10
+MOVS R0,#12
 
-MOVS R1,#2
+MOVS R1,#3
 
 CMP R0,R1
 
@@ -26,7 +26,7 @@ CMP R4,R1
 
 BCC #3
 
-ADDS R0,R0,R3
+ADD R0,R0,R3
 
 SUB R4,R4,R1
 
@@ -37,3 +37,4 @@ BNE #-7
 MOV R1,R4
 
 BX LR
+

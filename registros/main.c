@@ -24,13 +24,16 @@
 #define CELESTE     36
 #define BLANCO      37
 
+
 #define MAXLINEAS 15
 #define MAXCAD 70
 
-WINDOW *win; /** manejaremos una única ventana de pantalla completa **/
+WINDOW *win, *wine; /** manejaremos una única ventana de pantalla completa **/
+uint32_t memoria[MEMORIA];
 int Disp(void);
 void Inivideo(void);
 void Exit(void);
+
 
 void IniVideo(void){/*Para los colores */
 	win=initscr();/* Inicia modo curses */
@@ -82,16 +85,23 @@ int Disp(void){
 	
 	
 		char ch='0';				/*declaracion de variable tipo char para realizar acciones con el teclado	*/
-		int i, num_instructions; 	/*declaracion de variables*/
+uint32_t registros[15];
+uint32_t memoria[MEMORIA];
+
+		
+int i, num_instructions; 	/*declaracion de variables*/
 		ins_t read;					
 		char** instructions;
 		instruction_t instruction;
 		uint32_t pcou=0;			/*contador de direccion de operacion*/
-		uint32_t memoria=500;		/*cantidad maxima de instrucciones*/
-		num_instructions = readFile("prueba_1.txt", &read);
+		uint32_t memoria1=500;		/*cantidad maxima de instrucciones*/
+		num_instructions = readFile("code.txt", &read);
 		if(num_instructions==-1)
+			{
+			printw("Archivo .TXT no cargado");
+			getch();
 			return 0;
-		
+			}
 		if(read.array==NULL)
 			return 0;
 
@@ -105,7 +115,10 @@ int Disp(void){
 		Llama la instrucción que decodifica y ejecuta la instrucción
 	*/
 	instruction = getInstruction(instructions[1]); /* Instrucción en la posición 0*/
-while(pcou<memoria){
+while(pcou<memoria1){
+			obtener_registros(registros);
+			obtener_memoria(memoria);
+
             if(pcou>=num_instructions){
                 mvprintw(LINES-3,COLS/2,"Limite de instrucciones alcanzado");
                 getch();
@@ -113,8 +126,14 @@ while(pcou<memoria){
             }
             
             instruction = getInstruction(instructions[pcou]);
-            decodeInstruction(instruction);
+			if (ch != 'r')
+				{
+            	decodeInstruction(instruction);
+				}
+				
+			
             ch = getch();		/*obtiene el valor de la tecla presionada*/
+				
 			if(ch=='u'){ 		/*valida si la tecla presionada es u*/
 			attrset(COLOR_PAIR(4 ));
 			mvprintw(LINES-2,COLS/8-2,"  ");
@@ -132,6 +151,33 @@ while(pcou<memoria){
 			refresh();
 			}/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
 			
+			if(ch=='r')
+			{
+
+				
+			//son las fucnciones que devuelve los valores para poder mostrar la memoria ram
+
+				werase(win);		
+				mostrar_memoria(memoria,MEMORIA);	
+				mvprintw(1,1,"SP %.2X   MEMORIA %d  ",DIRMAXMEM,MEMORIA);	
+				wrefresh(win);	
+				getch();
+				werase(win);
+
+
+/*			
+				wine = subwin(win,LINES,COLS,0,0); (ParentWindow, NumLines, NumCols,Line,Column) 
+				wine = newwin(LINES,COLS,0,0);
+				scrollok(wine,1);
+				touchwin(win);
+				wbkgd(wine,COLOR_PAIR(2));
+				mostrar_memoria(memoria,MEMORIA);
+				wrefresh(wine);*/
+				
+				
+				
+			}
+
 			if(ch=='q'){		/*valida si la tecla presionada es q*/
 			Exit();				/*llama la funcion de salida, la que cierra el programa*/
 			}

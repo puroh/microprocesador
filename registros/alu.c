@@ -163,7 +163,6 @@ void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, per
     uint32_t a1,aux;
     aux=*Rm;
     (*Rd)=(*Rm)<<(Rn);
-    printw("alu_linea164.resultado en la alu %u",*Rd);
     comp=1;
     flag(Rd,Rm,&Rn,banderas,&comp);
     a1=((aux<<(Rn-1))&(1<<31))>>31;
