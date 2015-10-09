@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include <curses.h>
 
-
 bool banderas[4];
 uint32_t LR;
 
@@ -193,5 +192,5 @@ void BL(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza un
 }
 void BX(uint32_t *pc) /* Función que no retorna, pero realiza un salto a una dirección especifica por un registro */
 {
-   *pc=LR; /* El contador Pc toma el valor de la instrucción donde se encuentre LR*/
+	*pc=LR; /* El contador Pc toma el valor de la instrucción donde se encuentre LR*/
 }
