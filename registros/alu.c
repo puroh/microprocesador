@@ -160,32 +160,33 @@ void TST(uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza la 
 }
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la izquierda de un valor inmediato */
 {
-    uint32_t a1,aux;
+    uint32_t a1,aux;  /* Se declaran dos variables que serviran como auxiliares */
     aux=*Rm;
-    (*Rd)=(*Rm)<<(Rn);
-    comp=1;
-    flag(Rd,Rm,&Rn,banderas,&comp);
+
+    (*Rd)=(*Rm)<<(Rn); /* Desplaza el valor en la dirección Rm las veces del valor inmediato Rn */
+    //printw("alu_linea167.resultado en la alu %u",*Rd); /* Imprime en pantalla haciendo uso de la libreria curses*/
+    comp=1; /* Modifica solo una bandera */
+    flag(Rd,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
     a1=((aux<<(Rn-1))&(1<<31))>>31;
-    banderas[C]=a1;
+    banderas[C]=a1; 
 }
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, pero realiza un desplazamiento lógico a la derecha de un valor inmediato */
 {
-
-    uint32_t aux;
+    uint32_t aux; /* Se declara una variable que servira como auxiliar */
     aux=*Rm;
-    *Rd=*Rm>>Rn;
-    comp=1;
-    flag(Rm,Rm,&Rn,banderas,&comp);
+    *Rd=*Rm>>Rn; /* Desplaza el valor en la dirección Rm las veces del valor inmediato Rn */
+    comp=1; /* Modifica solo una bandera */
+    flag(Rm,Rm,&Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
     banderas[C]=(aux>>(Rn-1))&1;
 }
 void obtenerBandera(bool *bands) /* Función que se crea para modificar las banderas en otros archivos dentro del proyecto */
 {
     bands=banderas; /* Manda al archivo salto la modificación de las banderas */
 }
-void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn)
+void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza la multiplicacion entre las direcciones de los dos registros */
 {
-    *Rd=(*Rm)*(*Rn);
-    comp=2;
-     flag(Rd,Rm,Rn,banderas,&comp);
+    *Rd=(*Rm)*(*Rn); /* Multiplica el valor que se encuentre en las direcciones de Rm y Rn y lo guarda en la direccion de Rd */
+    comp=2; /* Modifica dos banderas */
+    flag(Rd,Rm,Rn,banderas,&comp); /* Se dirije a la función flag para determinar si en el resultado hay banderas */
 }
 
