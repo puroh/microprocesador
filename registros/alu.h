@@ -166,8 +166,8 @@ void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 */
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 /**
-*	\brief Funcion 
-*	\param bands
+*	\brief Funcion que maneja booleanos
+*	\param bands direccion que obtiene el valor de las banderas
 */
 void obtenerBandera(bool *bands);
 /**
