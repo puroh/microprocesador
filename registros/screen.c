@@ -28,8 +28,6 @@ void showRegisters(uint32_t *registers, size_t len)
 		attron(COLOR_PAIR(2));		
 		printw("%d", registers[i]);//Para hexadecimal  "%.8X\t"
 		refresh();
-	
-	}	
-	
+	}		
 	return;
 }

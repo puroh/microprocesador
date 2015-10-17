@@ -10,4 +10,4 @@
 
 void showRegisters(uint32_t *registers, size_t len);
 
-#endif	/* _SCREEN_H_ */
+#endif	// _SCREEN_H_ 
