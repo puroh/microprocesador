@@ -8,5 +8,6 @@ registros/*.depend*
 registros/*.o*
 registros/*.exe*
 registros/*.cbp*
+registros/main
 
 

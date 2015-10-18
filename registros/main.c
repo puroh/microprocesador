@@ -10,6 +10,7 @@
 #include "io.h"
 
 
+
 #define NORMAL       0
 #define BRILLO       1
 #define SEMIBRILLO   2
@@ -104,7 +105,7 @@ int i,mal=0, num_instructions; 	/*declaracion de variables*/
 				inimemoria(memoria,MEMORIA);
 				iniciaram();
 				mal=-1;
-				mvprintw(LINES-2,1,"entro %d ch %c lineas %d columnas %d",mal, ch, LINES,COLS);
+				//mvprintw(LINES-2,1,"entro %d ch %c lineas %d columnas %d",mal, ch, LINES,COLS);
 				
 			}
 		if(num_instructions==-1)
@@ -130,27 +131,14 @@ while(pcou<memoria1){
 			obtener_registros(registros);
 			obtener_memoria(memoria);
 
-			if(ch=='r')
-			{				
-			//son las fucnciones que devuelve los valores para poder mostrar la memoria ram
-				werase(win);
-				//obtener_registros(registros);
-				//obtener_memoria(memoria);		
-				mostrar_memoria(memoria,MEMORIA);	
-				mvprintw(1,1,"SP %.2X   MEMORIA %d  lineas %d columnas %d",registros[12],MEMORIA,LINES, COLS);	
-				attron(COLOR_PAIR(3));
-				mvprintw(5,(COLS/2)-10,"Bancos de memoria RAM");
-				wrefresh(win);	
-				getch();
-				werase(win);				
-			}
+
 			
             if(pcou>=num_instructions){
                 mvprintw(LINES-3,COLS/2,"Limite de instrucciones alcanzado");
                 getch();
                 break;
             }
-            
+            ch = getch();		/*obtiene el valor de la tecla presionada*/
             
 			if (ch != 'r')
 				{
@@ -160,7 +148,7 @@ while(pcou<memoria1){
 				}
 				
 			
-            ch = getch();		/*obtiene el valor de la tecla presionada*/
+            
 				
 			if(ch=='u'){ 		/*valida si la tecla presionada es u*/
 			attrset(COLOR_PAIR(4 ));
@@ -178,6 +166,33 @@ while(pcou<memoria1){
 			mvprintw(LINES-2,COLS/8-2,"    ");
 			refresh();
 			}/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
+
+			if(ch=='r')
+			{				
+			//son las fucnciones que devuelve los valores para poder mostrar la memoria ram
+				werase(win);					
+				mostrar_memoria(memoria,MEMORIA);	
+				//mvprintw(1,1,"SP %.2X   MEMORIA %d  lineas %d columnas %d",registros[13],MEMORIA,LINES, COLS);	
+				move(23,10);
+				printw("Presione: r para salir del modo mostrar SRAM");
+				attron(COLOR_PAIR(3));
+				mvprintw(5,(COLS/2)-10,"Bancos de memoria RAM");
+				
+				while(1) // Mientras presione una tecla diferente a r, muestra la memoria RAM y no ejecuta instrucciones
+				{ 
+				ch=getch(); 
+				if(ch=='r'){
+                    
+					break; 
+					}
+					
+					wrefresh(win);
+}
+				
+				werase(win);
+				
+								
+			}
 			if(ch=='e'){
 
                 werase(win);

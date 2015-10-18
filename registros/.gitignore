@@ -3,3 +3,4 @@ registros/*.o
 registros/*.cbp
 registros/*.depend
 registros/*.layout
+registros/main

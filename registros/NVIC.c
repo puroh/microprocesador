@@ -3,7 +3,7 @@
 
 void NVIC_EnableIRQ(uint8_t *Exnumb,uint8_t numb){
      Exnumb[numb]=1;
-     printw("Entro a NVIC");
+     //printw("Entro a NVIC");
 }
 
 void NVIC_DisableIRQ(uint8_t *Exnumb,uint8_t numb){

@@ -2,9 +2,9 @@
 #include "ram.h"
 #include <curses.h>
 #include "flags.h"
-uint8_t bitcount(uint8_t *R) //Determina cuantos 1 hay en los datos que contienen los registros
+uint32_t bitcount(uint32_t *R) //Determina cuantos 1 hay en los datos que contienen los registros
 {
-	uint8_t i,contador=0; //Declaracion e inicializacion de variables para el ciclo que determinara la cantidad de 1 que contiene cada registro
+	uint32_t i,contador=0; //Declaracion e inicializacion de variables para el ciclo que determinara la cantidad de 1 que contiene cada registro
 	for(i=0;i<16;i++) //Ciclo for que permite determina cuantos unos hay en cada registro
 	{
 		if((1 & R[i])!=0) //Condicion que permite establecer que si el valor en el registro es diferente de cero es porque es uno y el contador se incrementa
@@ -14,10 +14,10 @@ uint8_t bitcount(uint8_t *R) //Determina cuantos 1 hay en los datos que contiene
     }
     return contador; //Retorna el valor del contador, el cual determino la cantidad de unos que hay en los registros
 }
-void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res) //Funcion PUSH que permite ir almacenando los datos
+void PUSH(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion PUSH que permite ir almacenando los datos
 {
-    uint8_t address;
-    uint8_t i=0;
+    uint32_t address;
+    uint32_t i=0;
     if(registros[13]>=255){
     (registros[13])--;}
     address=registros[13]-(4*bitcount(res));
@@ -37,10 +37,10 @@ void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res) //Funcion PUSH que 
 		}
 	registros[13]-=(4*bitcount(res));
 }
-void POP(uint32_t *registros,uint32_t *memory,uint8_t *res) //Funcion POP que permite organizar los datos
+void POP(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion POP que permite organizar los datos
 {
-     uint8_t address;
-    uint8_t i=0;
+     uint32_t address;
+    uint32_t i=0;
 
     address=registros[13];
     for(i=0;i<16;i++){
@@ -72,7 +72,7 @@ void mostrar_memoria(uint32_t *memoria , int tama) //Funcion que muestra el pant
 			attron(COLOR_PAIR(1));
 			printw("%.2x",k);
 			attron(COLOR_PAIR(2));
-			printw(" : %.2X %.2X %.2X %.2X",(uint8_t)(memoria[l]>>24),(uint8_t)(memoria[l]>>16),(uint8_t)(memoria[l]>>8),(uint8_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
+			printw(" : %.2X %.2X %.2X %.2X",(uint32_t)(memoria[l]>>24),(uint32_t)(memoria[l]>>16),(uint32_t)(memoria[l]>>8),(uint32_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
 			k=k-4;
 			l=l+1;
 			h=h+18;			
@@ -93,16 +93,16 @@ void inimemoria(uint32_t *memoria,int tama) //Funcion que inicializa la memoria
 }
 
 
-void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint8_t *res)
+void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res)
 {
-    uint8_t address;
+    uint32_t address;
     bool bande[4];
     uint32_t bd;
 
     obtenerBandera(bande);
     bd=((bande[C])<<3)+((bande[Z])<<2)+((bande[N])<<1)+bande[V];
 
-    uint8_t i=0;
+    uint32_t i=0;
     if(registros[13]>255){
     (registros[13])--;}
 
@@ -118,10 +118,10 @@ void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint8_t *res)
 	registros[13]-=(4*bitcount(res))+4;
 	}
 
-void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint8_t *res)
+void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res)
 {
-    uint8_t address;
-    uint8_t i=0;
+    uint32_t address;
+    uint32_t i=0;
 
     bool f[4];
     uint32_t bd;
@@ -143,6 +143,37 @@ void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint8_t *res)
 		SalvarBanderas(f);
 
 	registros[13]+=(4*(bitcount(res)+1));
+}
+
+void LDR(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory)
+{
+    uint32_t direccion=Rn+Rm;
+    *Rt=(uint32_t)(memory[MEMORIA-((direccion/4)+2)]<<24)+(uint32_t)(memory[MEMORIA-((direccion/4)+2)]<<16)+(uint32_t)(memory[MEMORIA-((direccion/4)+2)]<<8)+memory[MEMORIA-((direccion/4)+2)];
+}
+void LDRB(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory)
+{
+    uint32_t direccion=Rn+Rm;
+    *Rt=memory[MEMORIA-((direccion/4)+2)];
+}
+void LDRH(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory)
+{
+    uint32_t direccion=Rn+Rm;
+    *Rt=(uint32_t)(memory[MEMORIA-((direccion/4)+2)]<<8)+(uint32_t)memory[MEMORIA-((direccion/4)+2)];
+}
+void STR(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory)
+{
+    uint32_t direccion = Rn + Rm;
+    memory[MEMORIA-((direccion/4)+2)]= *Rt;
+}
+void STRB(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory)
+{
+    uint32_t direccion=Rn+Rm;
+    memory[MEMORIA-((direccion/4)+2)]=*Rt;
+}
+void STRH(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory)
+{
+    uint32_t direccion=0;
+    memory[MEMORIA-((direccion/4)+2)]=*Rt;
 }
 
 /*

@@ -19,12 +19,25 @@ void mostrar_memoria(uint32_t *memoria , int tama);
 *	\param memoria Direccion en la cual se almacenan los datos en la memoria
 *   \param res Direccion 
 */
-void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res);
+void PUSH(uint32_t *registros,uint32_t *memory,uint32_t *res);
 /**
 *	\brief Funcion que permite realizar el POP en la memoria
 *	\param registros Direccion de los registros que van del 0 al 15
 *	\param memoria Direccion en la cual se almacenan los datos en la memoria
 *   \param res Direccion
 */
-void POP(uint32_t *registros,uint32_t *memory,uint8_t *res);
-uint8_t bitcount(uint8_t *R);
+void POP(uint32_t *registros,uint32_t *memory,uint32_t *res);
+uint32_t bitcount(uint32_t *R);
+void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res);
+void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res);
+void LDR(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory);
+
+void LDRB(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory);
+
+void LDRH(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory);
+
+void STR(uint32_t *Rt, uint32_t Rn, uint32_t Rm, uint32_t *memory);
+
+void STRB(uint32_t *Rt, uint32_t Rn, uint32_t Rm, uint32_t *memory);
+
+void STRH(uint32_t *Rt, uint32_t Rn, uint32_t Rm, uint32_t *memory);
