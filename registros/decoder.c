@@ -348,7 +348,7 @@ void obtenerPC(uint32_t *pcount)/* Función para obtener el program counter desd
 void obtener_registros(uint32_t *pcount)
 	{
     uint8_t i;
-    for(i=0;i<15;i++){
+    for(i=0;i<16;i++){
     pcount[i]=registers[i];}
 		}
 void obtener_memoria(uint32_t *pcount)

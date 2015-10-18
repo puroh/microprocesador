@@ -55,3 +55,7 @@ void obtener_registros(uint32_t *pcount);
 
 
 void obtener_memoria(uint32_t *pcount);
+
+void PUSHINTERRUPT(registers,memoria,guardar);
+
+void PUSHINTERRUPT(registers,memoria,guardar);
