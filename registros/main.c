@@ -29,7 +29,8 @@
 #define MAXCAD 70
 
 WINDOW *win, *wine; /** manejaremos una única ventana de pantalla completa **/
-
+uint32_t memoria[MEMORIA];
+uint8_t data;
 int Disp(void);
 void Inivideo(void);
 void Exit(void);

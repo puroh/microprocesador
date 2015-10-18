@@ -184,13 +184,13 @@ void BAL(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza s
 {
     pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
 }
-void BL(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza un salto hasta la instrucción en LR */
+void BL(uint32_t *pc,uint32_t valor,uint32_t *LR) /* Función que no retorna, pero realiza un salto hasta la instrucción en LR */
 {
-    LR=*pc+2; /* LR toma el valor de la instrucción que tenga PC sumandole 2 posiciones */
+    *LR=*pc+2; /* LR toma el valor de la instrucción que tenga PC sumandole 2 posiciones */
     *pc+=valor<<1; /* Redirecciona el contador Pc según la instruccción */
     mvprintw(6,40,"LR:%d",LR); /* IMprime en pantalla el valor de LR haciendo uso de la libreria curses */
 }
-void BX(uint32_t *pc) /* Función que no retorna, pero realiza un salto a una dirección especifica por un registro */
+void BX(uint32_t *pc,uint32_t *LR) /* Función que no retorna, pero realiza un salto a una dirección especifica por un registro */
 {
-	*pc=LR; /* El contador Pc toma el valor de la instrucción donde se encuentre LR*/
+	*pc=*LR; /* El contador Pc toma el valor de la instrucción donde se encuentre LR*/
 }
