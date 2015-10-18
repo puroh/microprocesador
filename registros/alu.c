@@ -181,7 +181,17 @@ void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) /* Función que no retorna, per
 }
 void obtenerBandera(bool *bands) /* Función que se crea para modificar las banderas en otros archivos dentro del proyecto */
 {
-    bands=banderas; /* Manda al archivo salto la modificación de las banderas */
+	bands[C]=banderas[C];
+    bands[Z]=banderas[Z];
+    bands[N]=banderas[N];
+    bands[V]=banderas[V]; /* Manda al archivo salto la modificación de las banderas */
+}
+void SalvarBanderas(bool *bands)
+{
+    banderas[C]=bands[C];
+    banderas[Z]=bands[Z];
+    banderas[N]=bands[N];
+    banderas[V]=bands[V];
 }
 void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn) /* Función que no retorna, pero realiza la multiplicacion entre las direcciones de los dos registros */
 {

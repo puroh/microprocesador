@@ -48,3 +48,10 @@ void obtenerPC(uint32_t *pcount);
 void decodeInstruction(instruction_t instruction);
 
 #endif /*_DECODER_H_*/
+
+void iniciaram(void);
+
+void obtener_registros(uint32_t *pcount);
+
+
+void obtener_memoria(uint32_t *pcount);

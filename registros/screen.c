@@ -10,10 +10,11 @@ void showRegisters(uint32_t *registers, size_t len)
 	move(0,COLS/2-15);
 	attron(COLOR_PAIR(3));
 	printw("  Emulador procesador Cortex M0  ");
-	mvprintw(2,2,"Registros en hexadecimal ");
-	mvprintw(LINES-2,COLS/8,"Correr = u");
-	mvprintw(LINES-2,COLS/2-4,"Parar = p");
-	mvprintw(LINES-2,COLS*6/8,"Salir = q");
+	mvprintw(2,2,"Registros en hexadecimal ");	
+	mvprintw(LINES-2,(COLS/5)-5,"Correr = u");
+	mvprintw(LINES-2,(COLS*2/5)-4,"Parar = p");
+	mvprintw(LINES-2,(COLS*3/5)-4,"Salir = q");
+	mvprintw(LINES-2,(COLS*4/5)-7,"Mostar RAM = r");
 	refresh();
 
 	if(!registers)

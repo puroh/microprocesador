@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "ram.h"
 #include <curses.h>
+#include "flags.h"
 uint8_t bitcount(uint8_t *R) //Determina cuantos 1 hay en los datos que contienen los registros
 {
 	uint8_t i,contador=0; //Declaracion e inicializacion de variables para el ciclo que determinara la cantidad de 1 que contiene cada registro
@@ -15,97 +16,138 @@ uint8_t bitcount(uint8_t *R) //Determina cuantos 1 hay en los datos que contiene
 }
 void PUSH(uint32_t *registros,uint32_t *memory,uint8_t *res) //Funcion PUSH que permite ir almacenando los datos
 {
-    uint8_t address; //Declaracion de variables
+    uint8_t address;
     uint8_t i=0;
-    (registros[12])--;
-    address=registros[12]-(4*bitcount(res));
-    for(i=0;i<15;i++)
-	{
-		if( (1  & res[i])!= 0 )
-		{
+    if(registros[13]>=255){
+    (registros[13])--;}
+    address=registros[13]-(4*bitcount(res));
+
+
+    for(i=0;i<16;i++){
+        if(1&(res[8]|res[9]|res[10]|res[11]|res[12]|res[15])){
+        registros[13]+=(4*bitcount(res));
+        break;
+        }
+		if( (1  & res[i])!= 0 ){
+
             memory[MEMORIA-((address/4)+2)]=registros[i];
+
 			address=address+4;
+			}
 		}
-	}
-	registros[12]-=(4*bitcount(res));
+	registros[13]-=(4*bitcount(res));
 }
 void POP(uint32_t *registros,uint32_t *memory,uint8_t *res) //Funcion POP que permite organizar los datos
 {
-    uint8_t address;
+     uint8_t address;
     uint8_t i=0;
-    address=registros[12];
-    for(i=0;i<7;i++)
-	{
-		if( (1 & res[i])!= 0 )
-		{
-			registros[i]=memory[MEMORIA-((address/4)+2)];
+
+    address=registros[13];
+    for(i=0;i<16;i++){
+        if(1&(res[8]|res[9]|res[10]|res[11]|res[12]|res[14])){
+        registros[13]-=(4*bitcount(res));
+        break;
+        }
+		if( (1 & res[i])!= 0 ){
+           registros[i]=memory[MEMORIA-((address/4)+2)];
+
+
 			address=address+4;
+			}
 		}
-	}
-	registros[12]+=(4*bitcount(res));
+	registros[13]+=(4*bitcount(res));
 }
 void mostrar_memoria(uint32_t *memoria , int tama) //Funcion que muestra el pantalla los valores guardados en menoria 
 {
     int i,j,h,k,l;
 
-        h=0;
-		l=0;
-		k=DIRMAXMEM;
-	    for(i=0;i<tama/8;i++)
-        {
-			for(j=0;j<tama/8;j++)
+	h=2;
+	l=0;
+	k=DIRMAXMEM;
+	for (i=0 ; i<tama/8;i++)//filas
+		{
+		for (j=0; j<tama/8;j++)//columnas
 			{
-				h+=1;
-				mvprintw(14+i,5+h,"%.2X : %.2X %.2X %.2X %.2X",k,(uint8_t)(memoria[l]>>24),(uint8_t)(memoria[l]>>16),(uint8_t)(memoria[l]>>8),(uint8_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
-				l=l+1;
-				k=k-4;
-        		refresh();
+			move(i+7,j+h);//posiciona el cursor
+			attron(COLOR_PAIR(1));
+			printw("%.2x",k);
+			attron(COLOR_PAIR(2));
+			printw(" : %.2X %.2X %.2X %.2X",(uint8_t)(memoria[l]>>24),(uint8_t)(memoria[l]>>16),(uint8_t)(memoria[l]>>8),(uint8_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
+			k=k-4;
+			l=l+1;
+			h=h+18;			
+			}
+		h=2;
+		}	
 
-        }
-		//tama = 64
-		h=0;
-	}
+
 }
 
 void inimemoria(uint32_t *memoria,int tama) //Funcion que inicializa la memoria
 {
     int i; //Declaracion de variable para el ciclo for
-    for(i=0;i<(tama*4);i++) //Comienza desde el valor maximo y va disminuyendo
+    for(i=0;i<(tama);i++) //Comienza desde el valor maximo y va disminuyendo
     {
         memoria[i]= -1; 
     }
 }
 
 
-/*
-void inicia_ram(void)
+void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint8_t *res)
 {
-	
-    uint32_t registros[15]={10,11,12,13,14,15,250,251,0,0,0,0,1,0,0};
-	registro[12] es SP
-    uint32_t memoria[MEMORIA];
+    uint8_t address;
+    bool bande[4];
+    uint32_t bd;
 
-    registros[12]= DIRMAXMEM+1;
-	inimemoria(memoria,MEMORIA);
-	
-    mvprintw(11,20,"\t\tmemoria inicializada");
-	refresh();
-    mostrar_memoria(memoria,MEMORIA);
+    obtenerBandera(bande);
+    bd=((bande[C])<<3)+((bande[Z])<<2)+((bande[N])<<1)+bande[V];
 
-    PUSH(registros,memoria,"R2,R3,R4,R5");
+    uint8_t i=0;
+    if(registros[13]>255){
+    (registros[13])--;}
 
-    mostrar_memoria(memoria,MEMORIA);
+    address=registros[13]-(4*bitcount(res)+4);
 
-    POP(registros,memoria,"R0,R1,R2,R3");
+    for(i=0;i<16;i++){
+		if( (1  & res[i])!= 0 ){
+        memory[MEMORIA-((address/4)+2)]=registros[i];
+			address=address+4;
+			}
+		}
+		memory[MEMORIA-((address/4)+2)]=bd;
+	registros[13]-=(4*bitcount(res))+4;
+	}
 
-    mostrar_memoria(memoria,MEMORIA);
+void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint8_t *res)
+{
+    uint8_t address;
+    uint8_t i=0;
 
-    mvprintw(23,20,"Valor de registros %.8X %.8X  %.8X  %.8X",registros[0],registros[1],registros[2],registros[3]);
+    bool f[4];
+    uint32_t bd;
 
-    mvprintw(25,20,"valor de SP %.8X ",registros[12]);
-	refresh();
+    address=registros[13];
+    for(i=0;i<16;i++){
+		if( (1 & res[i])!= 0 ){
+           registros[i]=memory[MEMORIA-((address/4)+2)];
+
+
+			address=address+4;
+			}
+		}
+		bd = memory[MEMORIA-((address/4)+2)];
+		f[C]=(1&bd>>3);
+		f[Z]=(1&bd>>2);
+		f[N]=(1&bd>>1);
+		f[V]=(1&bd);
+		SalvarBanderas(f);
+
+	registros[13]+=(4*(bitcount(res)+1));
+}
+
+/*
 
 fila 11
 columna 20
-Disp();
-}*/
+
+*/

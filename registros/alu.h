@@ -97,4 +97,5 @@ void TST(uint32_t *Rm,uint32_t *Rn);
 void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void LSRS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn);
 void obtenerBandera(bool *bands);
+void SalvarBanderas(bool *bands);
 void MULS(uint32_t *Rd,uint32_t *Rm,uint32_t *Rn);

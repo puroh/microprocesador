@@ -7,7 +7,7 @@
 #include "flags.h"
 #include "decoder.h"
 #include "ram.h"
-
+#include "io.h"
 
 
 #define NORMAL       0
@@ -29,7 +29,7 @@
 #define MAXCAD 70
 
 WINDOW *win, *wine; /** manejaremos una única ventana de pantalla completa **/
-uint32_t memoria[MEMORIA];
+
 int Disp(void);
 void Inivideo(void);
 void Exit(void);
@@ -89,13 +89,23 @@ uint32_t registros[15];
 uint32_t memoria[MEMORIA];
 
 		
-int i, num_instructions; 	/*declaracion de variables*/
+int i,mal=0, num_instructions; 	/*declaracion de variables*/
 		ins_t read;					
 		char** instructions;
 		instruction_t instruction;
 		uint32_t pcou=0;			/*contador de direccion de operacion*/
 		uint32_t memoria1=500;		/*cantidad maxima de instrucciones*/
-		num_instructions = readFile("code.txt", &read);
+		num_instructions = readFile("prueba_1.txt", &read);
+
+		if((mal!=-1) & (ch=='0'))
+			{
+				
+				inimemoria(memoria,MEMORIA);
+				iniciaram();
+				mal=-1;
+				mvprintw(LINES-2,1,"entro %d ch %c lineas %d columnas %d",mal, ch, LINES,COLS);
+				
+			}
 		if(num_instructions==-1)
 			{
 			printw("Archivo .TXT no cargado");
@@ -119,16 +129,33 @@ while(pcou<memoria1){
 			obtener_registros(registros);
 			obtener_memoria(memoria);
 
+			if(ch=='r')
+			{				
+			//son las fucnciones que devuelve los valores para poder mostrar la memoria ram
+				werase(win);
+				//obtener_registros(registros);
+				//obtener_memoria(memoria);		
+				mostrar_memoria(memoria,MEMORIA);	
+				mvprintw(1,1,"SP %.2X   MEMORIA %d  lineas %d columnas %d",registros[12],MEMORIA,LINES, COLS);	
+				attron(COLOR_PAIR(3));
+				mvprintw(5,(COLS/2)-10,"Bancos de memoria RAM");
+				wrefresh(win);	
+				getch();
+				werase(win);				
+			}
+			
             if(pcou>=num_instructions){
                 mvprintw(LINES-3,COLS/2,"Limite de instrucciones alcanzado");
                 getch();
                 break;
             }
             
-            instruction = getInstruction(instructions[pcou]);
+            
 			if (ch != 'r')
 				{
+				instruction = getInstruction(instructions[pcou]);
             	decodeInstruction(instruction);
+				obtenerPC(&pcou);
 				}
 				
 			
@@ -150,33 +177,38 @@ while(pcou<memoria1){
 			mvprintw(LINES-2,COLS/8-2,"    ");
 			refresh();
 			}/*un valor negativo deshabilita para que el codigo siga corriendo solo*/
-			
-			if(ch=='r')
-			{
+			if(ch=='e'){
 
-				
-			//son las fucnciones que devuelve los valores para poder mostrar la memoria ram
+                werase(win);
 
-				werase(win);		
-				mostrar_memoria(memoria,MEMORIA);	
-				mvprintw(1,1,"SP %.2X   MEMORIA %d  ",DIRMAXMEM,MEMORIA);	
-				wrefresh(win);	
-				getch();
-				werase(win);
+                werase(wine);
 
+                initIO();	// Inicializa los puertos de E/S
 
-/*			
-				wine = subwin(win,LINES,COLS,0,0); (ParentWindow, NumLines, NumCols,Line,Column) 
-				wine = newwin(LINES,COLS,0,0);
-				scrollok(wine,1);
-				touchwin(win);
-				wbkgd(wine,COLOR_PAIR(2));
-				mostrar_memoria(memoria,MEMORIA);
-				wrefresh(wine);*/
-				
-				
-				
-			}
+                data = 1;
+                IOAccess(13, &data, Write);	// Escribe en el registro de interrupciones
+                                            // Habilita la interrupción 0 del puerto B
+                data = 0xAA;
+                IOAccess(10, &data, Write);	// Escribe 0xAA al DDRB
+
+                data=0xFF;
+                IOAccess(11, &data, Write);	// Escribe 0xFF al PORTB
+
+                IOAccess(12, &data, Read);	// Lee el PINB
+
+                IOAccess(1, &data, Write);	// Escribe el valor del PINB al PORTA
+
+                changePinPortB(0,HIGH);		// Cambia el valor del Pin a Alto
+
+                showPorts();				// Muestra en pantalla el estado del puerto
+
+                getch();
+
+                werase(win);
+
+                werase(wine);
+            }
+
 
 			if(ch=='q'){		/*valida si la tecla presionada es q*/
 			Exit();				/*llama la funcion de salida, la que cierra el programa*/
@@ -188,8 +220,8 @@ mvprintw(LINES-2,COLS/2-4,"Parar = p");
 mvprintw(LINES-2,COLS*6/8,"Salir = q");
 
 
-*/
-            obtenerPC(&pcou);
+*/			
+            
 
         }
 		

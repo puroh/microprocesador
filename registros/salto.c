@@ -10,14 +10,14 @@ uint32_t LR;
 
 void B(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza un salto en una dirección especifica */
 {
-   *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+   *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
 }
 void BEQ(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza un salto teniendo en cuenta la bandera Z */
 {
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[Z]==1) /* Condición de salto para BEQ */
 	{
-       *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+       *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -29,7 +29,7 @@ void BNE(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[Z]==0) /* Condición de salto para BNE */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -41,7 +41,7 @@ void BCS(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[C]==1) /* Condición de salto para BCS */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -53,7 +53,7 @@ void BCC(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[C]==0) /* Condición de salto para BCC */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -65,7 +65,7 @@ void BMI(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[N]==1) /* Condición de salto para BMI */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -77,7 +77,7 @@ void BPL(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[N]==0) /* Condición de salto para BPL */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -89,7 +89,7 @@ void BVS(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[V]==1) /* Condición de salto para BVS */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -101,7 +101,7 @@ void BVC(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[V]==0) /* Condición de salto para BVC */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -113,7 +113,7 @@ void BHI(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if((banderas[C]==1)&&(banderas[Z]==0)) /* Condición de salto para BHI */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -125,7 +125,7 @@ void BLS(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if((banderas[C]==0)&&(banderas[Z]==1)) /* Condición de salto para BLS */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -137,7 +137,7 @@ void BGE(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[N]==banderas[V]) /* Condición de salto para BGE */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -149,7 +149,7 @@ void BLT(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[N]!=banderas[V]) /* Condición de salto para BLT */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -161,7 +161,7 @@ void BGT(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if(banderas[Z]==0) /* Condición de salto para BGT */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -173,7 +173,7 @@ void BLE(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
     obtenerBandera(banderas); /* Obtiene el valor de la bandera para posteriormente ser evaluado */
     if((banderas[Z]==0)&&(banderas[N]==banderas[V])) /* Condición de salto para BLE */
 	{
-        *pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+        *pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
     }
     else /* En caso contrario realiza la siguiente operación */
 	{
@@ -182,12 +182,12 @@ void BLE(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza u
 }
 void BAL(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza siempre un salto el cual no tiene condición para realizarlo*/
 {
-    pc+= 2*valor; /* Redirecciona el contador Pc según la instruccción */
+    pc+= valor<<1; /* Redirecciona el contador Pc según la instruccción */
 }
 void BL(uint32_t *pc,uint32_t valor) /* Función que no retorna, pero realiza un salto hasta la instrucción en LR */
 {
     LR=*pc+2; /* LR toma el valor de la instrucción que tenga PC sumandole 2 posiciones */
-    *pc+=valor*2; /* Redirecciona el contador Pc según la instruccción */
+    *pc+=valor<<1; /* Redirecciona el contador Pc según la instruccción */
     mvprintw(6,40,"LR:%d",LR); /* IMprime en pantalla el valor de LR haciendo uso de la libreria curses */
 }
 void BX(uint32_t *pc) /* Función que no retorna, pero realiza un salto a una dirección especifica por un registro */
