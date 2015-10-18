@@ -1,13 +1,15 @@
 #include <stdint.h>
 #include "NVIC.h"
 
-void NVIC_EnableIRQ(uint8_t *Exnumb,uint8_t numb){
-     Exnumb[numb]=1;
-     //printw("Entro a NVIC");
+void NVIC_EnableIRQ(uint8_t *Exnumb,uint8_t numb) // Funcion que activa las interrupciones
+{
+    Exnumb[numb]=1; // Condicion para entrar a las instrucciones de interrupcion
+    //printw("Entro a NVIC");
 }
 
-void NVIC_DisableIRQ(uint8_t *Exnumb,uint8_t numb){
-    Exnumb[numb]=0;
+void NVIC_DisableIRQ(uint8_t *Exnumb,uint8_t numb) // Funcion que ejecuta la regresion al codigo principal 
+{
+    Exnumb[numb]=0; // Condicion para regresar al codigo principal
 }
 /*
 Exnumb 16=IRQ0  Primer interrupcion (n+15)=IRQ(n-1);
