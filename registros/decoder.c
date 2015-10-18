@@ -6,12 +6,14 @@
 #include "ram.h"
 #include "NVIC.h"
 
-    uint32_t registers[15];
+    uint32_t registers[16];
     uint32_t memoria[MEMORIA];//se define el program counter y el LR que se modifica con BL
-    uint8_t  guardar[16]={1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1};
+    uint32_t  guardar[16]={1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1};
     uint8_t i,indicador=0;
     uint8_t exnum[16]={0};
     uint16_t bin=0;
+	
+	
 
 void iniciaram(void) //Funcion que inicia la ram
 {
@@ -629,7 +631,7 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) // compara el mnemonico con ADD
 
               POPINTERRUPT(registers,memoria,guardar);
 
-              mostrar_memoria(memoria,MEMORIA);
+              //mostrar_memoria(memoria,MEMORIA);
 
               BX(&registers[15],&registers[14]);
                                                         }
@@ -642,7 +644,7 @@ showRegisters(registers,16);
 }
 void obtenerPC(uint32_t *pcount)// Función para obtener el program counter desde el main 
 {
-*pcount=registers[15];
+	*pcount=registers[15];
 }
 void obtener_registros(uint32_t *pcount)
 {

@@ -163,7 +163,7 @@ void LSLS(uint32_t *Rd,uint32_t *Rm,uint32_t Rn) //Funcion que no retorna pero r
     uint32_t a1,aux;  //Se declaran dos variables que serviran como auxiliares  
     aux=*Rm; //Se declara una auxiliar con el valor contenido en Rm
     (*Rd)=(*Rm)<<(Rn); //Desplaza el valor en la direccion Rm las veces del valor inmediato Rn 
-    printw("alu_linea164.resultado en la alu %u",*Rd); //Imprime en pantalla haciendo uso de la libreria curses
+    //printw("alu_linea164.resultado en la alu %u",*Rd); //Imprime en pantalla haciendo uso de la libreria curses
     comp=1; //Modifica solo una bandera 
     flag(Rd,Rm,&Rn,banderas,&comp); //Se dirije a la funcion flag para determinar si en el resultado hay banderas 
     a1=((aux<<(Rn-1))&(1<<31))>>31; //Operacion que permitira determinar si hay banderas

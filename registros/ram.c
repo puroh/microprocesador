@@ -2,6 +2,7 @@
 #include "ram.h"
 #include <curses.h>
 #include "flags.h"
+#include "alu.h"
 uint32_t bitcount(uint32_t *R) //Determina cuantos 1 hay en los datos que contienen los registros
 {
 	uint32_t i,contador=0; //Declaracion e inicializacion de variables para el ciclo que determinara la cantidad de 1 que contiene cada registro
@@ -72,7 +73,7 @@ void mostrar_memoria(uint32_t *memoria , int tama) //Funcion que muestra el pant
 			attron(COLOR_PAIR(1));
 			printw("%.2x",k); //imprime
 			attron(COLOR_PAIR(2));
-			printw(" : %.2X %.2X %.2X %.2X",(uint32_t)(memoria[l]>>24),(uint32_t)(memoria[l]>>16),(uint32_t)(memoria[l]>>8),(uint32_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
+			printw(" : %.2X %.2X %.2X %.2X",(uint8_t)(memoria[l]>>24),(uint8_t)(memoria[l]>>16),(uint8_t)(memoria[l]>>8),(uint8_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
 			k=k-4; // Va en orden ascendente para mostrar el contenido de la ram ya que baja cada 4 veces cuando se guarda 
 			l=l+1; // Variable que va ir dando la posicion de la memoeria en la que se va a guardar
 			h=h+18;	// Incremento que se usa para la visualizacion espaciada en la panatalla al mostrar el banco de registros		
@@ -112,6 +113,7 @@ void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion
 	memory[MEMORIA-((address/4)+2)]=bd; //Igualacion en la memoria al valor en bd
 	registros[13]-=(4*bitcount(res))+4; //posicionamiento del sp
 }
+
 void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion POP dentro de la interrupcion
 {
     uint32_t address; //declara direccion
@@ -135,6 +137,7 @@ void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion 
 	SalvarBanderas(f); //guarda los cambios de las banderas para posteriormente ser usados
 	registros[13]+=(4*(bitcount(res)+1)); //posicionamiento del sp
 }
+
 void LDR(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory) // Funcion que extrae 4 valores de la pila dependiendo de la suma de las direcciones 
 {
     uint32_t direccion=Rn+Rm; //operacion que realiza para determinar el posicionamiento donde extraera el valor en memoria

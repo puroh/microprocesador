@@ -84,7 +84,7 @@ int Disp(void)
 	instruction_t instruction;
 	uint32_t pcou=0;			//contador de direccion de operacion
 	uint32_t memoria1=500;		//cantidad maxima de instrucciones
-	num_instructions = readFile("prueba_1.txt", &read);
+	num_instructions = readFile("code.txt", &read);
 	if((mal!=-1) & (ch=='0'))
 	{			
 		inimemoria(memoria,MEMORIA);
@@ -182,7 +182,7 @@ int Disp(void)
             showPorts();				// Muestra en pantalla el estado del puerto
             getch();
             werase(win);
-            werase(ine);
+            werase(wine);
         }
 		if(ch=='q') //valida si la tecla presionada es q
 		{		

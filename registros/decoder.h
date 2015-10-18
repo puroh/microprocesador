@@ -19,7 +19,7 @@ typedef struct
 	uint32_t op1_value;
 	uint32_t op2_value;
 	uint32_t op3_value;
-	uint8_t  registers_list[16];
+	uint32_t  registers_list[16];
 }
 instruction_t;
 /** 
@@ -68,13 +68,4 @@ void obtener_memoria(uint32_t *pcount);
 *   \param memoria
 *   \param guardar
 */
-void PUSHINTERRUPT(registers,memoria,guardar);
-/** 
-*   \brief Funcion POP dentro de la interrupcion
-*   \param registers 
-*   \param memoria 
-*   \param guardar
-*/
-void POPHINTERRUPT(registers,memoria,guardar);
-
 
