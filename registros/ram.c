@@ -70,7 +70,7 @@ void mostrar_memoria(uint32_t *memoria , int tama) //Funcion que muestra el pant
 		{
 			move(i+7,j+h); //posiciona el cursor
 			attron(COLOR_PAIR(1));
-			printw("%.2x",k);
+			printw("%.2x",k); //imprime
 			attron(COLOR_PAIR(2));
 			printw(" : %.2X %.2X %.2X %.2X",(uint32_t)(memoria[l]>>24),(uint32_t)(memoria[l]>>16),(uint32_t)(memoria[l]>>8),(uint32_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
 			k=k-4; // Va en orden ascendente para mostrar el contenido de la ram ya que baja cada 4 veces cuando se guarda 
@@ -88,53 +88,52 @@ void inimemoria(uint32_t *memoria,int tama) //Funcion que inicializa la memoria
         memoria[i]= -1; // A cada posicion de memoria se llena con -1
     }
 }
-void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res)
+void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion PUSH dentro de la interrupcion
 {
-    uint32_t address;
-    bool bande[4];
-    uint32_t bd;
-    obtenerBandera(bande);
+    uint32_t address; //declara direccion
+    bool bande[4]; //uso de banderas
+    uint32_t bd; //declaracion de variables sin signo de 32 bits
+    obtenerBandera(bande); //obtiene el valor de las banderas C,N,V y Z
     bd=((bande[C])<<3)+((bande[Z])<<2)+((bande[N])<<1)+bande[V];
-    uint32_t i=0;
+    uint32_t i=0; //declaracion de variables sin signo de 32 bits para ser usada dentro del for
     if(registros[13]>255)
 	{
-		(registros[13])--;
+		(registros[13])--; //decremento en los registros
 	}
     address=registros[13]-(4*bitcount(res)+4);
-    for(i=0;i<16;i++)
+    for(i=0;i<16;i++) // Condicion en donde comenzara a guardar los datos 
 	{
 		if( (1  & res[i])!= 0 )
 		{
-			memory[MEMORIA-((address/4)+2)]=registros[i];
-			address=address+4;
+			memory[MEMORIA-((address/4)+2)]=registros[i]; // Posicion en donde almacenara la memoria el dato del registro[i]
+			address=address+4; // Modifica la memoria maxima disponible y cuadra el sp
 		}
 	}
-	memory[MEMORIA-((address/4)+2)]=bd; 
-	registros[13]-=(4*bitcount(res))+4;
+	memory[MEMORIA-((address/4)+2)]=bd; //Igualacion en la memoria al valor en bd
+	registros[13]-=(4*bitcount(res))+4; //posicionamiento del sp
 }
-
-void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res)
+void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res) //Funcion POP dentro de la interrupcion
 {
-    uint32_t address;
-    uint32_t i=0;
-    bool f[4];
-    uint32_t bd;
-    address=registros[13];
-    for(i=0;i<16;i++)
+    uint32_t address; //declara direccion
+    uint32_t i=0; //declaracion de variables sin signo de 32 bits para ser usado en el for
+    bool f[4]; //uso de banderas
+    uint32_t bd; //declaracion de variables sin signo de 32 bits
+    address=registros[13]; //declara el registro 13 como sp
+    for(i=0;i<16;i++) // Ciclos de los espacios de memoria en donde se esta guardando la informacion
 	{
 		if( (1 & res[i])!= 0 )
 		{
-           registros[i]=memory[MEMORIA-((address/4)+2)];
-			address=address+4;
+			registros[i]=memory[MEMORIA-((address/4)+2)]; // Posicion en donde almacenara la memoria el dato del registro[i]
+			address=address+4; // Modifica la memoria maxima disponible y cuadra el sp
 		}
 	}
-	bd = memory[MEMORIA-((address/4)+2)];
-	f[C]=(1&bd>>3);
-	f[Z]=(1&bd>>2);
-	f[N]=(1&bd>>1);
-	f[V]=(1&bd);
-	SalvarBanderas(f);
-	registros[13]+=(4*(bitcount(res)+1));
+	bd = memory[MEMORIA-((address/4)+2)]; //bd valdra lo que hay en dicha posicion de memoria
+	f[C]=(1&bd>>3); //la bandera de carry sera igual a dicho desplazamiento multiplicado por 1
+	f[Z]=(1&bd>>2); //la bandera de ceros sera igual a dicho desplazamiento multiplicado por 1
+	f[N]=(1&bd>>1); //la bandera de negativo sera igual a dicho desplazamiento multiplicado por 1
+	f[V]=(1&bd); //la bandera de sobreflujo sera igual al bd multiplicado por 1
+	SalvarBanderas(f); //guarda los cambios de las banderas para posteriormente ser usados
+	registros[13]+=(4*(bitcount(res)+1)); //posicionamiento del sp
 }
 void LDR(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory) // Funcion que extrae 4 valores de la pila dependiendo de la suma de las direcciones 
 {

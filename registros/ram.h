@@ -30,16 +30,16 @@ void POP(uint32_t *registros,uint32_t *memory,uint32_t *res);
 uint32_t bitcount(uint32_t *R);
 /** 
 *   \brief Funcion POP dentro de la interrupcion
-*   \param registers 
+*   \param registros Registros del 0 al 15
 *   \param memoria Direccion de memoria
-*   \param rest
+*   \param rest Registros en memoria
 */
 void POPINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res);
 /** 
 *   \brief Funcion POP dentro de la interrupcion
-*   \param registers
+*   \param registros Registros del 0 al 15
 *   \param memoria Direccion de memoria
-*   \param res
+*   \param res Registros en memoria
 */
 void PUSHINTERRUPT(uint32_t *registros,uint32_t *memory,uint32_t *res);
 /**
