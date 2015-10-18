@@ -1,20 +1,5 @@
-<<<<<<< HEAD
 void LDR(uint32_t Rt,uint32_t Rn,uint32_t imm);
 
-void LDRB (uint32_t Rt,uint32_t Rn,uint32_t imm);
-
-void LDRH (uint32_t Rt,uint32_t Rn,uint32_t imm);
-
-void LDRSB (uint32_t Rt,uint32_t Rn,uint32_t Rm);
-
-void LDRSH (uint32_t Rt,uint32_t Rn,uint32_t Rm);
-
-void STR (uint32_t Rt,uint32_t Rn,uint32_t imm, uint32_t Rm,uint32_t Sp);
-
-void STRB (uint32_t Rt,uint32_t Rn,uint32_t imm,uint32_t Rm);
-
-void STRH (uint32_t Rt,uint32_t Rn,uint32_t imm,uint32_t Rm);
-=======
 /**
 *	\brief Funcion que extrae 4 valores de la pila dependiendo de la suma de las direcciones con valor inmediato
 *	\param Rt Es la direccion de donde se extrae los valores
@@ -74,6 +59,6 @@ void STRB (uint_32 Rt,uint_32 Rn,uint_32 imm,uint_32 Rm);
 *   \param inm Es el inmediato, el cual se le realiza una extension de ceros|
 */
 void STRH (uint_32 Rt,uint_32 Rn,uint_32 imm,uint_32 Rm);
->>>>>>> 2b03ec7ac41d2a96f3e76736f37d9cc95cc805b8
+
 
 
