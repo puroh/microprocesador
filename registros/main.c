@@ -127,9 +127,9 @@ int Disp(void)
 		if(ch=='u') //valida si la tecla presionada es u
 		{ 		
 			attrset(COLOR_PAIR(4 ));
-			mvprintw(LINES-2,COLS/8-2,"  ");
+			mvprintw(LINES-2,(COLS/5)-7,"  ");
 			attrset(COLOR_PAIR(6 ));
-			mvprintw(LINES-2,COLS/2-6,"  ");
+			mvprintw(LINES-2,(COLS*2/5)-6,"  ");
 			refresh();			
 			timeout(1000);					
 		}		//instruccion que permite seguir ejecutando el codigo aun si no se esta presionando
@@ -137,9 +137,9 @@ int Disp(void)
 		{
             timeout(-1);
 			attrset(COLOR_PAIR(4 ));
-			mvprintw(LINES-2,COLS/2-6,"    ");
+			mvprintw(LINES-2,(COLS*2/5)-6,"  ");
 			attrset(COLOR_PAIR(6 ));
-			mvprintw(LINES-2,COLS/8-2,"    ");
+			mvprintw(LINES-2,(COLS/5)-7,"  ");			
 			refresh();
 		}//un valor negativo deshabilita para que el codigo siga corriendo solo
 		if(ch=='r')
