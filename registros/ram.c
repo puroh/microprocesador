@@ -71,7 +71,7 @@ void mostrar_memoria(uint32_t *memoria , int tama) //Funcion que muestra el pant
 		{
 			move(i+7,j+h); //posiciona el cursor
 			attron(COLOR_PAIR(1));
-			printw("%.2x",k); //imprime
+			printw("%.2X",k); //imprime
 			attron(COLOR_PAIR(2));
 			printw(" : %.2X %.2X %.2X %.2X",(uint8_t)(memoria[l]>>24),(uint8_t)(memoria[l]>>16),(uint8_t)(memoria[l]>>8),(uint8_t)(memoria[l]));//Visualiza los valores guardados en memoria haciendo uso de la libreria curses
 			k=k-4; // Va en orden ascendente para mostrar el contenido de la ram ya que baja cada 4 veces cuando se guarda 
@@ -155,8 +155,13 @@ void LDRH(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory) // Funcion que 
 }
 void STR(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory) // Funcion que almacena 4 valores en la pila 
 {
+
     uint32_t direccion = Rn + Rm; //operacion que realiza para determinar el posicionamiento donde almacenara el valor en memoria
-    memory[MEMORIA-((direccion/4)+2)]= *Rt; //donde se ubicara en memoria para almacenar el valor
+
+	mvprintw(30,40," :%d \n",MEMORIA-((direccion/4)+2));
+    mvprintw(33,40," :%d \n",*Rt);      
+	
+memory[MEMORIA-((direccion/4)+2)]= *Rt; //donde se ubicara en memoria para almacenar el valor
 }
 void STRB(uint32_t *Rt,uint32_t Rn,uint32_t Rm,uint32_t *memory) // Funcion que almacena un valore en la pila ya sea los primeros 8 bit o los 8 bit ultimos
 {

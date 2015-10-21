@@ -10,7 +10,7 @@
     uint32_t memoria[MEMORIA];//se define el program counter y el LR que se modifica con BL
     uint32_t  guardar[16]={1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1};
     uint8_t i,indicador=0;
-    uint8_t exnum[16]={0};
+    uint8_t exnum[16]={0};//manejo de interrupciones
     uint16_t bin=0;
 	
 
@@ -37,6 +37,18 @@ void decodeInstruction(instruction_t instruction)
                     break;
                 }
             }
+
+			
+			for(i=0;i<16;i++)
+			{
+			
+			mvprintw(20,10*(i)+1,"%d",exnum[i]);
+			refresh();
+}
+
+
+
+
 	attron(COLOR_PAIR(2));//Se mofifica el color del printw
     mvprintw(4,40,"Valor de PC %d\n",registers[14]);//se imprime en pantalla en la posicion 4,40
     if( strcmp(instruction.mnemonic,"PUSH") == 0 ){
@@ -282,22 +294,17 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) // compara el mnemonico con ADD
 	}
 	if( strcmp(instruction.mnemonic,"LDR") ==0)
     {
+			
         if((instruction.op1_type=='R') && (instruction.op2_type=='R') && (instruction.op3_type=='#'))
         {
+			mvprintw(25,40,"ENTRO EN LDR  %d",instruction.op2_value); //muestra el resultado de la operación
+ 
             bin=(13<<11)+((instruction.op3_value&0xFF)<<6)+(instruction.op2_value<<3)+instruction.op1_value;
+			mvprintw(15,40,"Instruccion binaria :%.8X \n",bin);
             instruction.op3_value<<=2;
-            if(((*(registers+instruction.op2_value)+instruction.op3_value)>=0x20000000)&&((*(registers+instruction.op2_value)+instruction.op3_value)<0x40000000))
-            {
-                LDR(registers+instruction.op1_value,(*(registers+instruction.op2_value))&0xFF,instruction.op3_value&0xFF,memoria);
-            }
-            if((*(registers+instruction.op2_value)+instruction.op3_value)<0x20000000)
-            {
-
-            }
-            if((*(registers+instruction.op2_value)+instruction.op3_value)>=0x40000000)
-            {
-
-            }
+			
+                LDR(registers+instruction.op1_value,(*(registers+instruction.op2_value)),instruction.op3_value,memoria);
+            
         }
         if((instruction.op1_type=='R') && (instruction.op2_type=='S') && (instruction.op3_type=='#'))
         {
@@ -427,7 +434,14 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) // compara el mnemonico con ADD
     {
         if((instruction.op1_type=='R') && (instruction.op2_type=='R') && (instruction.op3_type=='#'))
         {
-            STR(registers+instruction.op1_value,(*(registers+instruction.op2_value))&0xFF,(*(registers+instruction.op3_value))&0xFF,memoria);
+			mvprintw(25,40,"ENTRO EN STR  %d",instruction.op2_value); //muestra el resultado de la operación
+ 
+            bin=(13<<11)+((instruction.op3_value&0xFF)<<6)+(instruction.op2_value<<3)+instruction.op1_value;
+			mvprintw(15,40,"Instruccion binaria :%.8X \n",bin);
+            instruction.op3_value<<=2;
+			
+                STR(registers+instruction.op1_value,(*(registers+instruction.op2_value)),instruction.op3_value,memoria);
+            
         }
         if((instruction.op1_type=='R') && (instruction.op2_type=='S') && (instruction.op3_type=='#'))
         {
@@ -470,6 +484,8 @@ if( strcmp(instruction.mnemonic,"ADD") == 0 ) // compara el mnemonico con ADD
         }
         if( strcmp(instruction.mnemonic,"B") == 0 ) //compara B con el mnemonico en en code.txt en el valor del arreglo definido por PC. Si es igual ejecuta las instrucciones
 		{
+			bin=(7<<13)+instruction.op1_value;
+		    mvprintw(15,40,"Instruccion binaria :%.8X \n",bin); //Imprime en interfaz mediante curses
             mvprintw(5,40,"Instruccion :%s %c%d\n",instruction.mnemonic,instruction.op1_type,instruction.op1_value); //Imprime en interfaz mediante curses
             B(&registers[15],instruction.op1_value); //ejecuta la operacion B
         }

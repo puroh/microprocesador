@@ -1,0 +1,39 @@
+B #2
+
+B #6
+
+MOVS R0,#1
+
+MOVS R1,#2
+
+MOVS R2,#3
+
+MOVS R3,#4
+
+B #0
+
+NOP 
+
+MOVS R0,#6
+
+MOVS R1,#6
+
+MOVS R2,#6
+
+MOVS R3,#6
+
+PUSH {R0,R2,R3}
+
+LDR R7,[R13,#1]
+
+POP {R4,R5,R6}
+
+MOVS R2,#10
+
+STR R2,[R13,#2]
+
+CMP R0,R1
+
+BX LR
+
+
